@@ -1,0 +1,32 @@
+In file included from [01m[K/usr/include/c++/7/bits/locale_conv.h:41:0[m[K,
+                 from [01m[K/usr/include/c++/7/locale:43[m[K,
+                 from [01m[K/usr/include/c++/7/iomanip:43[m[K,
+                 from [01m[K/usr/local/include/boost/math/policies/error_handling.hpp:12[m[K,
+                 from [01m[K/usr/local/include/boost/math/special_functions/round.hpp:14[m[K,
+                 from [01m[K/opt/ros/melodic/include/ros/time.h:58[m[K,
+                 from [01m[K/opt/ros/melodic/include/ros/ros.h:38[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OctomapEditing.hpp:6[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OctomapEditing.cpp:1[m[K:
+/usr/include/c++/7/bits/unique_ptr.h: In instantiation of '[01m[Ktypename std::_MakeUniq<_Tp>::__single_object std::make_unique(_Args&& ...) [with _Tp = octomap::OcTree; _Args = {}; typename std::_MakeUniq<_Tp>::__single_object = std::unique_ptr<octomap::OcTree>][m[K':
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OctomapEditing.cpp:6:49:[m[K   required from here
+[01m[K/usr/include/c++/7/bits/unique_ptr.h:825:30:[m[K [01;31m[Kerror: [m[Kno matching function for call to '[01m[Koctomap::OcTree::OcTree()[m[K'
+     { return unique_ptr<_Tp>([01;31m[Knew _Tp(std::forward<_Args>(__args)...)[m[K); }
+                              [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OctomapEditing.hpp:8:0[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OctomapEditing.cpp:1[m[K:
+[01m[K/opt/ros/melodic/include/octomap/OcTree.h:60:5:[m[K [01;36m[Knote: [m[Kcandidate: octomap::OcTree::OcTree(std::__cxx11::string)
+     [01;36m[KOcTree[m[K(std::string _filename);
+     [01;36m[K^~~~~~[m[K
+[01m[K/opt/ros/melodic/include/octomap/OcTree.h:60:5:[m[K [01;36m[Knote: [m[K  candidate expects 1 argument, 0 provided
+[01m[K/opt/ros/melodic/include/octomap/OcTree.h:53:5:[m[K [01;36m[Knote: [m[Kcandidate: octomap::OcTree::OcTree(double)
+     [01;36m[KOcTree[m[K(double resolution);
+     [01;36m[K^~~~~~[m[K
+[01m[K/opt/ros/melodic/include/octomap/OcTree.h:53:5:[m[K [01;36m[Knote: [m[K  candidate expects 1 argument, 0 provided
+[01m[K/opt/ros/melodic/include/octomap/OcTree.h:49:9:[m[K [01;36m[Knote: [m[Kcandidate: octomap::OcTree::OcTree(const octomap::OcTree&)
+   class [01;36m[KOcTree[m[K : public OccupancyOcTreeBase <OcTreeNode> {
+         [01;36m[K^~~~~~[m[K
+[01m[K/opt/ros/melodic/include/octomap/OcTree.h:49:9:[m[K [01;36m[Knote: [m[K  candidate expects 1 argument, 0 provided
+make[2]: *** [CMakeFiles/octomap_editing.dir/src/OctomapEditing.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+make[1]: *** [CMakeFiles/octomap_editing.dir/all] Error 2
+make: *** [all] Error 2

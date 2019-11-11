@@ -1,0 +1,25 @@
+In file included from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OctomapEditingServer.cpp:1:0[m[K:
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OctomapEditingServer.hpp:[m[K In constructor '[01m[Koctomap_editing::OctomapEditingServer::OctomapEditingServer()[m[K':
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OctomapEditingServer.hpp:13:38:[m[K [01;31m[Kerror: [m[Kcannot bind non-const lvalue reference of type '[01m[Kinteractive_markers::InteractiveMarkerServer&[m[K' to an rvalue of type '[01m[Kinteractive_markers::InteractiveMarkerServer[m[K'
+       : _server(interactive_markers::[01;31m[KInteractiveMarkerServer("test")[m[K)
+                                      [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OctomapEditingServer.hpp:4:0[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OctomapEditingServer.cpp:1[m[K:
+[01m[K/opt/ros/melodic/include/interactive_markers/interactive_marker_server.h:56:7:[m[K [01;36m[Knote: [m[K  initializing argument 1 of '[01m[Kinteractive_markers::InteractiveMarkerServer::InteractiveMarkerServer(interactive_markers::InteractiveMarkerServer&)[m[K'
+ class [01;36m[KInteractiveMarkerServer[m[K : boost::noncopyable
+       [01;36m[K^~~~~~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/octomap_editing.cpp:2:0[m[K:
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OctomapEditingServer.hpp:[m[K In constructor '[01m[Koctomap_editing::OctomapEditingServer::OctomapEditingServer()[m[K':
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OctomapEditingServer.hpp:13:38:[m[K [01;31m[Kerror: [m[Kcannot bind non-const lvalue reference of type '[01m[Kinteractive_markers::InteractiveMarkerServer&[m[K' to an rvalue of type '[01m[Kinteractive_markers::InteractiveMarkerServer[m[K'
+       : _server(interactive_markers::[01;31m[KInteractiveMarkerServer("test")[m[K)
+                                      [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OctomapEditingServer.hpp:4:0[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/octomap_editing.cpp:2[m[K:
+[01m[K/opt/ros/melodic/include/interactive_markers/interactive_marker_server.h:56:7:[m[K [01;36m[Knote: [m[K  initializing argument 1 of '[01m[Kinteractive_markers::InteractiveMarkerServer::InteractiveMarkerServer(interactive_markers::InteractiveMarkerServer&)[m[K'
+ class [01;36m[KInteractiveMarkerServer[m[K : boost::noncopyable
+       [01;36m[K^~~~~~~~~~~~~~~~~~~~~~~[m[K
+make[2]: *** [CMakeFiles/octomap_editing.dir/src/OctomapEditingServer.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+make[2]: *** [CMakeFiles/octomap_editing.dir/src/octomap_editing.cpp.o] Error 1
+make[1]: *** [CMakeFiles/octomap_editing.dir/all] Error 2
+make: *** [all] Error 2

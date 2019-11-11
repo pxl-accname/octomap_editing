@@ -1,0 +1,56 @@
+[35m[1mScanning dependencies of target GMock[0m
+[ 12%] [34m[1mCreating directories for 'GMock'[0m
+[ 25%] [34m[1mNo download step for 'GMock'[0m
+[ 37%] [34m[1mNo patch step for 'GMock'[0m
+[ 50%] [34m[1mNo update step for 'GMock'[0m
+[ 62%] [34m[1mPerforming configure step for 'GMock'[0m
+-- The CXX compiler identification is GNU 7.4.0
+-- The C compiler identification is GNU 7.4.0
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Found PythonInterp: /usr/bin/python (found version "2.7.15") 
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Looking for pthread_create
+-- Looking for pthread_create - not found
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - found
+-- Found Threads: TRUE  
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/accname/programming/ROS/octomap_editing/catkin_ws/build/catkin_tools_prebuild/gmock
+[ 75%] [34m[1mPerforming build step for 'GMock'[0m
+[35m[1mScanning dependencies of target gtest[0m
+[35m[1mScanning dependencies of target gmock_main[0m
+[35m[1mScanning dependencies of target gmock[0m
+[  9%] [32mBuilding CXX object CMakeFiles/gmock.dir/usr/src/googletest/googletest/src/gtest-all.cc.o[0m
+[ 18%] [32mBuilding CXX object CMakeFiles/gmock_main.dir/src/gmock_main.cc.o[0m
+[ 27%] [32mBuilding CXX object gtest/CMakeFiles/gtest.dir/src/gtest-all.cc.o[0m
+[ 36%] [32mBuilding CXX object CMakeFiles/gmock.dir/src/gmock-all.cc.o[0m
+[ 45%] [32mBuilding CXX object CMakeFiles/gmock_main.dir/usr/src/googletest/googletest/src/gtest-all.cc.o[0m
+[ 54%] [32mBuilding CXX object CMakeFiles/gmock_main.dir/src/gmock-all.cc.o[0m
+[ 63%] [32m[1mLinking CXX static library libgmock.a[0m
+[ 72%] [32m[1mLinking CXX static library libgtest.a[0m
+[ 72%] Built target gmock
+[ 72%] Built target gtest
+[35m[1mScanning dependencies of target gtest_main[0m
+[ 81%] [32mBuilding CXX object gtest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o[0m
+[ 90%] [32m[1mLinking CXX static library libgmock_main.a[0m
+[100%] [32m[1mLinking CXX static library libgtest_main.a[0m
+[100%] Built target gtest_main
+[100%] Built target gmock_main
+[ 87%] [34m[1mNo install step for 'GMock'[0m
+[100%] [34m[1mCompleted 'GMock'[0m
+[100%] Built target GMock

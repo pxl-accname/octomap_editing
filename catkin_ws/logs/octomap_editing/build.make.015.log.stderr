@@ -1,0 +1,33 @@
+In file included from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/octomap_editing.cpp:1:0[m[K:
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OctomapEditing.hpp:23:1:[m[K [01;31m[Kerror: [m[K'[01m[Ks[m[K' does not name a type
+ [01;31m[Ks[m[K
+ [01;31m[K^[m[K
+In file included from [01m[K/opt/ros/melodic/include/visualization_msgs/InteractiveMarker.h:18:0[m[K,
+                 from [01m[K/opt/ros/melodic/include/visualization_msgs/InteractiveMarkerUpdate.h:18[m[K,
+                 from [01m[K/opt/ros/melodic/include/interactive_markers/interactive_marker_server.h:35[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/octomap_editing.cpp:3[m[K:
+[01m[K/opt/ros/melodic/include/std_msgs/Header.h:[m[K In function '[01m[Kstd::ostream& std_msgs::operator<<(std::ostream&, const std_msgs::Header_<ContainerAllocator>&)[m[K':
+[01m[K/opt/ros/melodic/include/std_msgs/Header.h:70:6:[m[K [01;31m[Kerror: [m[K'[01m[Kros::message_operations[m[K' has not been declared
+ ros::[01;31m[Kmessage_operations[m[K::Printer< ::std_msgs::Header_<ContainerAllocator> >::stream(s, "", v);
+      [01;31m[K^~~~~~~~~~~~~~~~~~[m[K
+[01m[K/opt/ros/melodic/include/std_msgs/Header.h:70:75:[m[K [01;31m[Kerror: [m[Kexpected primary-expression before '[01m[K>[m[K' token
+ ros::message_operations::Printer< ::std_msgs::Header_<ContainerAllocator> [01;31m[K>[m[K::stream(s, "", v);
+                                                                           [01;31m[K^[m[K
+[01m[K/opt/ros/melodic/include/std_msgs/Header.h:70:78:[m[K [01;31m[Kerror: [m[K'[01m[K::stream[m[K' has not been declared
+ ros::message_operations::Printer< ::std_msgs::Header_<ContainerAllocator> >::[01;31m[Kstream[m[K(s, "", v);
+                                                                              [01;31m[K^~~~~~[m[K
+[01m[K/opt/ros/melodic/include/std_msgs/Header.h:70:78:[m[K [01;36m[Knote: [m[Ksuggested alternative: '[01m[Kstrcat[m[K'
+ ros::message_operations::Printer< ::std_msgs::Header_<ContainerAllocator> >::[01;36m[Kstream[m[K(s, "", v);
+                                                                              [01;36m[K^~~~~~[m[K
+                                                                              [32m[Kstrcat[m[K
+In file included from [01m[K/opt/ros/melodic/include/visualization_msgs/InteractiveMarker.h:18:0[m[K,
+                 from [01m[K/opt/ros/melodic/include/visualization_msgs/InteractiveMarkerUpdate.h:18[m[K,
+                 from [01m[K/opt/ros/melodic/include/interactive_markers/interactive_marker_server.h:35[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/octomap_editing.cpp:3[m[K:
+[01m[K/opt/ros/melodic/include/std_msgs/Header.h:[m[K At global scope:
+[01m[K/opt/ros/melodic/include/std_msgs/Header.h:199:8:[m[K [01;31m[Kerror: [m[K'[01m[KPrinter[m[K' is not a class template
+ struct [01;31m[KPrinter[m[K< ::std_msgs::Header_<ContainerAllocator> >
+        [01;31m[K^~~~~~~[m[K
+make[2]: *** [CMakeFiles/octomap_editing.dir/src/octomap_editing.cpp.o] Error 1
+make[1]: *** [CMakeFiles/octomap_editing.dir/all] Error 2
+make: *** [all] Error 2

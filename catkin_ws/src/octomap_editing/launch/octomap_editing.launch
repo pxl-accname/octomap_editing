@@ -1,0 +1,15 @@
+<launch>
+	<node pkg="octomap_editing" type="octomap_editing" name="octomap_editing">
+		<param name="filename" type="string" value="/home/accname/programming/ROS/octomap_editing/outdoor.bt" />
+	</node>
+
+	<node pkg="rviz" type="rviz" name="octomap_editing_visualisation" output="screen" />
+
+	<node pkg="octomap_server" type="octomap_server_node" name="octomap_server"  output="screen">
+		<param name="resolution" value="0.05" />
+		<param name="height_map" value="false" />
+		<param name="colored_map" value="false" />
+		<param name="frame_id" type="string" value="map" />
+		<param name="latch" value="true" />
+	</node>
+</launch>

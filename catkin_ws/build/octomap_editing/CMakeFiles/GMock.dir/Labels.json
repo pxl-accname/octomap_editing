@@ -1,0 +1,43 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/accname/programming/ROS/octomap_editing/catkin_ws/build/octomap_editing/CMakeFiles/GMock"
+		},
+		{
+			"file" : "/home/accname/programming/ROS/octomap_editing/catkin_ws/build/octomap_editing/CMakeFiles/GMock.rule"
+		},
+		{
+			"file" : "/home/accname/programming/ROS/octomap_editing/catkin_ws/build/octomap_editing/CMakeFiles/GMock-complete.rule"
+		},
+		{
+			"file" : "/home/accname/programming/ROS/octomap_editing/catkin_ws/build/octomap_editing/GMock-prefix/src/GMock-stamp/GMock-install.rule"
+		},
+		{
+			"file" : "/home/accname/programming/ROS/octomap_editing/catkin_ws/build/octomap_editing/GMock-prefix/src/GMock-stamp/GMock-mkdir.rule"
+		},
+		{
+			"file" : "/home/accname/programming/ROS/octomap_editing/catkin_ws/build/octomap_editing/GMock-prefix/src/GMock-stamp/GMock-download.rule"
+		},
+		{
+			"file" : "/home/accname/programming/ROS/octomap_editing/catkin_ws/build/octomap_editing/GMock-prefix/src/GMock-stamp/GMock-update.rule"
+		},
+		{
+			"file" : "/home/accname/programming/ROS/octomap_editing/catkin_ws/build/octomap_editing/GMock-prefix/src/GMock-stamp/GMock-patch.rule"
+		},
+		{
+			"file" : "/home/accname/programming/ROS/octomap_editing/catkin_ws/build/octomap_editing/GMock-prefix/src/GMock-stamp/GMock-configure.rule"
+		},
+		{
+			"file" : "/home/accname/programming/ROS/octomap_editing/catkin_ws/build/octomap_editing/GMock-prefix/src/GMock-stamp/GMock-build.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"GMock"
+		],
+		"name" : "GMock"
+	}
+}

@@ -1,0 +1,5 @@
+CMake Error at /home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/CMakeLists.txt:59 (target_include_directories):
+  target_include_directories called with invalid arguments
+
+
+make: *** [cmake_check_build_system] Error 1

@@ -1,0 +1,22 @@
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OctomapEditingServer.cpp:[m[K In constructor '[01m[Koctomap_editing::OctomapEditingServer::OctomapEditingServer(std::__cxx11::string)[m[K':
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OctomapEditingServer.cpp:4:70:[m[K [01;31m[Kerror: [m[Kno matching function for call to '[01m[Kinteractive_markers::InteractiveMarkerServer::InteractiveMarkerServer()[m[K'
+   OctomapEditingServer::OctomapEditingServer(std::string update_topic[01;31m[K)[m[K
+                                                                      [01;31m[K^[m[K
+In file included from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OctomapEditingServer.hpp:4:0[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OctomapEditingServer.cpp:1[m[K:
+[01m[K/opt/ros/melodic/include/interactive_markers/interactive_marker_server.h:72:3:[m[K [01;36m[Knote: [m[Kcandidate: interactive_markers::InteractiveMarkerServer::InteractiveMarkerServer(const string&, const string&, bool)
+   [01;36m[KInteractiveMarkerServer[m[K( const std::string &topic_ns, const std::string &server_id="", bool spin_thread = false );
+   [01;36m[K^~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/opt/ros/melodic/include/interactive_markers/interactive_marker_server.h:72:3:[m[K [01;36m[Knote: [m[K  candidate expects 3 arguments, 0 provided
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OctomapEditingServer.cpp:6:36:[m[K [01;31m[Kerror: [m[Kcannot bind non-const lvalue reference of type '[01m[Kinteractive_markers::InteractiveMarkerServer&[m[K' to an rvalue of type '[01m[Kinteractive_markers::InteractiveMarkerServer[m[K'
+     _server = interactive_markers::[01;31m[KInteractiveMarkerServer("Test")[m[K;
+                                    [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OctomapEditingServer.hpp:4:0[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OctomapEditingServer.cpp:1[m[K:
+[01m[K/opt/ros/melodic/include/interactive_markers/interactive_marker_server.h:56:7:[m[K [01;36m[Knote: [m[K  initializing argument 1 of '[01m[Kinteractive_markers::InteractiveMarkerServer& interactive_markers::InteractiveMarkerServer::operator=(interactive_markers::InteractiveMarkerServer&)[m[K'
+ class [01;36m[KInteractiveMarkerServer[m[K : boost::noncopyable
+       [01;36m[K^~~~~~~~~~~~~~~~~~~~~~~[m[K
+make[2]: *** [CMakeFiles/octomap_editing.dir/src/OctomapEditingServer.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+make[1]: *** [CMakeFiles/octomap_editing.dir/all] Error 2
+make: *** [all] Error 2

@@ -1,0 +1,59 @@
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/accname/programming/ROS/octomap_editing/catkin_ws/build/catkin_tools_prebuild/gmock/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_d14d9/fast"
+make[3]: Entering directory '/home/accname/programming/ROS/octomap_editing/catkin_ws/build/catkin_tools_prebuild/gmock/CMakeFiles/CMakeTmp'
+/usr/bin/make -f CMakeFiles/cmTC_d14d9.dir/build.make CMakeFiles/cmTC_d14d9.dir/build
+make[4]: Entering directory '/home/accname/programming/ROS/octomap_editing/catkin_ws/build/catkin_tools_prebuild/gmock/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_d14d9.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_d14d9.dir/CheckSymbolExists.c.o   -c /home/accname/programming/ROS/octomap_editing/catkin_ws/build/catkin_tools_prebuild/gmock/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_d14d9
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d14d9.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_d14d9.dir/CheckSymbolExists.c.o  -o cmTC_d14d9 
+CMakeFiles/cmTC_d14d9.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0x1b): undefined reference to `pthread_create'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_d14d9.dir/build.make:97: recipe for target 'cmTC_d14d9' failed
+make[4]: *** [cmTC_d14d9] Error 1
+make[4]: Leaving directory '/home/accname/programming/ROS/octomap_editing/catkin_ws/build/catkin_tools_prebuild/gmock/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_d14d9/fast' failed
+make[3]: *** [cmTC_d14d9/fast] Error 2
+make[3]: Leaving directory '/home/accname/programming/ROS/octomap_editing/catkin_ws/build/catkin_tools_prebuild/gmock/CMakeFiles/CMakeTmp'
+
+File /home/accname/programming/ROS/octomap_editing/catkin_ws/build/catkin_tools_prebuild/gmock/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/accname/programming/ROS/octomap_editing/catkin_ws/build/catkin_tools_prebuild/gmock/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_a5b8a/fast"
+make[3]: Entering directory '/home/accname/programming/ROS/octomap_editing/catkin_ws/build/catkin_tools_prebuild/gmock/CMakeFiles/CMakeTmp'
+/usr/bin/make -f CMakeFiles/cmTC_a5b8a.dir/build.make CMakeFiles/cmTC_a5b8a.dir/build
+make[4]: Entering directory '/home/accname/programming/ROS/octomap_editing/catkin_ws/build/catkin_tools_prebuild/gmock/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_a5b8a.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_a5b8a.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.10/Modules/CheckFunctionExists.c
+Linking C executable cmTC_a5b8a
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a5b8a.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_a5b8a.dir/CheckFunctionExists.c.o  -o cmTC_a5b8a -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_a5b8a.dir/build.make:97: recipe for target 'cmTC_a5b8a' failed
+make[4]: *** [cmTC_a5b8a] Error 1
+make[4]: Leaving directory '/home/accname/programming/ROS/octomap_editing/catkin_ws/build/catkin_tools_prebuild/gmock/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_a5b8a/fast' failed
+make[3]: *** [cmTC_a5b8a/fast] Error 2
+make[3]: Leaving directory '/home/accname/programming/ROS/octomap_editing/catkin_ws/build/catkin_tools_prebuild/gmock/CMakeFiles/CMakeTmp'
+
+

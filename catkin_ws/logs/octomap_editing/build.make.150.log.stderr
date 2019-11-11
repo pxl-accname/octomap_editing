@@ -1,0 +1,15 @@
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OctomapEditingServer.cpp:4:3:[m[K [01;31m[Kerror: [m[Kprototype for '[01m[Koctomap_editing::OctomapEditingServer::OctomapEditingServer(std::__cxx11::string)[m[K' does not match any in class '[01m[Koctomap_editing::OctomapEditingServer[m[K'
+   [01;31m[KOctomapEditingServer[m[K::OctomapEditingServer(std::string update_topic)
+   [01;31m[K^~~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OctomapEditingServer.cpp:1:0[m[K:
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OctomapEditingServer.hpp:8:9:[m[K [01;31m[Kerror: [m[Kcandidates are: octomap_editing::OctomapEditingServer::OctomapEditingServer(octomap_editing::OctomapEditingServer&&)
+   class [01;31m[KOctomapEditingServer[m[K
+         [01;31m[K^~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OctomapEditingServer.hpp:8:9:[m[K [01;31m[Kerror: [m[K                octomap_editing::OctomapEditingServer::OctomapEditingServer(octomap_editing::OctomapEditingServer&)
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OctomapEditingServer.hpp:11:7:[m[K [01;31m[Kerror: [m[K                octomap_editing::OctomapEditingServer::OctomapEditingServer()
+       [01;31m[KOctomapEditingServer[m[K();
+       [01;31m[K^~~~~~~~~~~~~~~~~~~~[m[K
+make[2]: *** [CMakeFiles/octomap_editing.dir/src/OctomapEditingServer.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+make[1]: *** [CMakeFiles/octomap_editing.dir/all] Error 2
+make: *** [all] Error 2
