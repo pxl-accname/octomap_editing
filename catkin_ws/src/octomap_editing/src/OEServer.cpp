@@ -95,15 +95,20 @@ namespace octomap_editing
     menu_handler.setCheckState(move_axis_x_entry, MenuHandler::UNCHECKED);
     _mapping_menuentry_axis[move_axis_x_entry] = "X";
 
-
     interactive_markers::MenuHandler::EntryHandle move_axis_y_entry = menu_handler.insert(move_axis_entry, "Y", boost::bind(&octomap_editing::OEServer::menuMoveAxisFeedback, this, _1));
     menu_handler.setCheckState(move_axis_y_entry, MenuHandler::UNCHECKED);
     _mapping_menuentry_axis[move_axis_y_entry] = "Y";
 
-
     interactive_markers::MenuHandler::EntryHandle move_axis_z_entry = menu_handler.insert(move_axis_entry, "Z", boost::bind(&octomap_editing::OEServer::menuMoveAxisFeedback, this, _1));
     menu_handler.setCheckState(move_axis_z_entry, MenuHandler::UNCHECKED);
     _mapping_menuentry_axis[move_axis_z_entry] = "Z";
+
+    interactive_markers::MenuHandler::EntryHandle move_axis_addAll_entry = menu_handler.insert(move_axis_entry, "Add all axes", boost::bind(&octomap_editing::OEServer::menuAddRemoveMoveAxisFeedback, this, _1));
+    _mapping_menuentry_axis[move_axis_addAll_entry] = "addAll";
+
+    interactive_markers::MenuHandler::EntryHandle move_axis_removeAll_entry = menu_handler.insert(move_axis_entry, "Remove all axes", boost::bind(&octomap_editing::OEServer::menuAddRemoveMoveAxisFeedback, this, _1));
+    _mapping_menuentry_axis[move_axis_removeAll_entry] = "removeAll";
+
 
 
     // rotate part
@@ -121,7 +126,65 @@ namespace octomap_editing
     menu_handler.setCheckState(rotate_axis_z_entry, MenuHandler::UNCHECKED);
     _mapping_menuentry_axis[rotate_axis_z_entry] = "Z";
 
+    interactive_markers::MenuHandler::EntryHandle rotate_axis_addAll_entry = menu_handler.insert(rotate_axis_entry, "Add all axes", boost::bind(&octomap_editing::OEServer::menuAddRemoveRotateAxisFeedback, this, _1));
+    _mapping_menuentry_axis[rotate_axis_addAll_entry] = "addAll";
+
+    interactive_markers::MenuHandler::EntryHandle rotate_axis_removeAll_entry = menu_handler.insert(rotate_axis_entry, "Remove all axes", boost::bind(&octomap_editing::OEServer::menuAddRemoveRotateAxisFeedback, this, _1));
+    _mapping_menuentry_axis[rotate_axis_removeAll_entry] = "removeAll";
+
     return menu_handler;
+  }
+
+  void
+  OEServer::menuAddRemoveMoveAxisFeedback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback)
+  {
+    std::shared_ptr<visualization_msgs::InteractiveMarker> marker = _markers[feedback->marker_name];
+
+    if (_mapping_menuentry_axis[feedback->menu_entry_id] == "addAll")
+    {
+      marker->controls.push_back(_markerFactory.createMoveAxisControl("move_X"));
+      marker->controls.push_back(_markerFactory.createMoveAxisControl("move_Y"));
+      marker->controls.push_back(_markerFactory.createMoveAxisControl("move_Z"));
+    }
+    else
+    {
+      std::vector<visualization_msgs::InteractiveMarkerControl> new_controls;
+      for (size_t i = 0; i < marker->controls.size(); ++i)
+      {
+        if (marker->controls[i].name == "")
+        {
+          new_controls.push_back(marker->controls[i]);
+        }
+      }
+      marker->controls = new_controls;
+    }
+    refreshServer();
+  }
+
+  void
+  OEServer:: menuAddRemoveRotateAxisFeedback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback)
+  {
+    std::shared_ptr<visualization_msgs::InteractiveMarker> marker = _markers[feedback->marker_name];
+
+    if (_mapping_menuentry_axis[feedback->menu_entry_id] == "addAll")
+    {
+      marker->controls.push_back(_markerFactory.createRotateAxisControl("rotate_X"));
+      marker->controls.push_back(_markerFactory.createRotateAxisControl("rotate_Y"));
+      marker->controls.push_back(_markerFactory.createRotateAxisControl("rotate_Z"));
+    }
+    else
+    {
+      std::vector<visualization_msgs::InteractiveMarkerControl> new_controls;
+      for (size_t i = 0; i < marker->controls.size(); ++i)
+      {
+        if (marker->controls[i].name == "")
+        {
+          new_controls.push_back(marker->controls[i]);
+        }
+      }
+      marker->controls = new_controls;
+    }
+    refreshServer();
   }
 
   void
@@ -249,39 +312,36 @@ namespace octomap_editing
   void
   OEServer::processMarkerFeedback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback )
   {
-    if (feedback->event_type == visualization_msgs::InteractiveMarkerFeedback::MOUSE_DOWN)
+    switch (feedback->event_type)
     {
+      case visualization_msgs::InteractiveMarkerFeedback::MOUSE_DOWN:
+        {} break;
 
-    }
-    else if (feedback->event_type == visualization_msgs::InteractiveMarkerFeedback::MOUSE_UP)
-    {
-      if (_markers.find(feedback->marker_name) != _markers.end())
-      {
-        if (feedback->marker_name == "imarker_pointcloud")
+      case visualization_msgs::InteractiveMarkerFeedback::MOUSE_UP:
         {
-          // calculate the change in position
-          calculatePoseChange(feedback->pose);
-          publishPointCloud();
+          if (_markers.find(feedback->marker_name) != _markers.end())
+          {
+            if (feedback->marker_name == "imarker_pointcloud")
+            {
+              // calculate the change in position
+              calculatePoseChange(feedback->pose);
+              publishPointCloud();
+            }
+
+            std::shared_ptr<visualization_msgs::InteractiveMarker> imarker = _markers[feedback->marker_name];
+            imarker->pose = feedback->pose;
+
+            updateText(feedback->pose);
+            refreshServer();
+          }
+          else
+          {
+            // marker nicht gefunden
+          }
         }
-
-        std::shared_ptr<visualization_msgs::InteractiveMarker> imarker = _markers[feedback->marker_name];
-        imarker->pose = feedback->pose;
-
-        updateText(feedback->pose);
-        refreshServer();
-      }
-      else
-      {
-        // marker nicht gefunden
-      }
+        break;
     }
   }
-
-
-
-
-
-
 
   void
   OEServer::applyChangesFeedback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback)

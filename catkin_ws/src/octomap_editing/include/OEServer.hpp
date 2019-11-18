@@ -42,6 +42,8 @@ namespace octomap_editing
     void processMarkerFeedback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback);
     void applyChangesFeedback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback);
     void resetChangesFeedback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback);
+    void menuAddRemoveMoveAxisFeedback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback);
+    void menuAddRemoveRotateAxisFeedback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback);
     void getPointCloudCallback(const sensor_msgs::PointCloud2 &pc);
     void publishPointCloud();
     octomap::pose6d getTransformationMatrix(bool transl);
