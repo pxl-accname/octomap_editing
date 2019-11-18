@@ -1,9 +1,0 @@
-CMake Error at /opt/ros/melodic/share/catkin/cmake/catkin_package.cmake:224 (message):
-  catkin_package() DEPENDS on the catkin package 'visualization_msgs' which
-  must therefore be listed as a run dependency in the package.xml
-Call Stack (most recent call first):
-  /opt/ros/melodic/share/catkin/cmake/catkin_package.cmake:102 (_catkin_package)
-  CMakeLists.txt:45 (catkin_package)
-
-
-make: *** [cmake_check_build_system] Error 1

@@ -1,8 +1,0 @@
-[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEServer.cpp:[m[K In member function '[01m[Kvoid octomap_editing::OEServer::menuEntryFeedback2(const InteractiveMarkerFeedbackConstPtr&)[m[K':
-[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEServer.cpp:74:7:[m[K [01;31m[Kerror: [m[Kexpected unqualified-id before '[01m[K}[m[K' token
-       [01;31m[K}[m[K
-       [01;31m[K^[m[K
-make[2]: *** [CMakeFiles/octomap_editing.dir/src/OEServer.cpp.o] Error 1
-make[2]: *** Waiting for unfinished jobs....
-make[1]: *** [CMakeFiles/octomap_editing.dir/all] Error 2
-make: *** [all] Error 2

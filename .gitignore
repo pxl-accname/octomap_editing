@@ -30,3 +30,11 @@
 *.exe
 *.out
 *.app
+
+# Marius changes
+catkin_ws/build/
+catkin_ws/devel/
+catkin_ws/log/
+catkin_ws/.catkin_tools/
+octomap_editing.workspace
+octomap_editing.workspace.user
