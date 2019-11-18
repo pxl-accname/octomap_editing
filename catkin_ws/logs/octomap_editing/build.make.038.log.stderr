@@ -1,6 +1,0 @@
-CMakeFiles/octomap_editing.dir/src/octomap_editing.cpp.o: In function `main':
-/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/octomap_editing.cpp:30: undefined reference to `OctomapEditing::OctomapEditing()'
-collect2: error: ld returned 1 exit status
-make[2]: *** [/home/accname/programming/ROS/octomap_editing/catkin_ws/devel/.private/octomap_editing/lib/octomap_editing/octomap_editing] Error 1
-make[1]: *** [CMakeFiles/octomap_editing.dir/all] Error 2
-make: *** [all] Error 2

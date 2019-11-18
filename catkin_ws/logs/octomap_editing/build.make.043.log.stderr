@@ -1,7 +1,0 @@
-[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OctomapEditing.cpp:[m[K In member function '[01m[Kbool OctomapEditing::openFile(const string&)[m[K':
-[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OctomapEditing.cpp:18:3:[m[K [01;31m[Kerror: [m[Kexpected '[01m[K;[m[K' before '[01m[Kreturn[m[K'
-   [01;31m[Kreturn[m[K true;
-   [01;31m[K^~~~~~[m[K
-make[2]: *** [CMakeFiles/octomap_editing.dir/src/OctomapEditing.cpp.o] Error 1
-make[1]: *** [CMakeFiles/octomap_editing.dir/all] Error 2
-make: *** [all] Error 2

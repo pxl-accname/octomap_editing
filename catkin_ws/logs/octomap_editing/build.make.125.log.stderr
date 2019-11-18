@@ -1,7 +1,0 @@
-[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/octomap_editing.cpp:[m[K In function '[01m[Kvoid processFeedback(const InteractiveMarkerFeedbackConstPtr&)[m[K':
-[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/octomap_editing.cpp:31:33:[m[K [01;31m[Kerror: [m[Kassignment of member '[01m[Kgeometry_msgs::Point_<std::allocator<void> >::x[m[K' in read-only object
-     feedback->pose.position.x = [01;31m[K1[m[K;
-                                 [01;31m[K^[m[K
-make[2]: *** [CMakeFiles/octomap_editing.dir/src/octomap_editing.cpp.o] Error 1
-make[1]: *** [CMakeFiles/octomap_editing.dir/all] Error 2
-make: *** [all] Error 2

@@ -1,8 +1,0 @@
-In file included from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/octomap_editing.cpp:1:0[m[K:
-[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OctomapEditing.hpp:19:5:[m[K [01;31m[Kerror: [m[K'[01m[KOcTree[m[K' does not name a type; did you mean '[01m[Kfree[m[K'?
-     [01;31m[KOcTree[m[K _ocTree;
-     [01;31m[K^~~~~~[m[K
-     [32m[Kfree[m[K
-make[2]: *** [CMakeFiles/octomap_editing.dir/src/octomap_editing.cpp.o] Error 1
-make[1]: *** [CMakeFiles/octomap_editing.dir/all] Error 2
-make: *** [all] Error 2
