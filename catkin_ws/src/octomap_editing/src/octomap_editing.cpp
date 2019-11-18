@@ -16,31 +16,8 @@ int main(int argc, char** argv) {
     exit(-1);
   }
 
-  // 1. step: get the filename
   std::string mapFilename = std::string(argv[1]);
-  std::cout << "Mapfile: " << mapFilename << " found!" << std::endl;
-  // 2. step: init the IO class
-
-  // octomap_editing::OEIO OEIO();
-
-  // 3. step: start the InteractiveMarkerServer
-  ros::NodeHandle nh("octomap_editing");
-  octomap_editing::OEServer server(nh, 1.0, "octomap_editing");
-  server.openMapfile(mapFilename);
-
-//  octomap_server::OctomapServer ocServer(nh);
-//  std::cout << "Opening map file..." << std::endl;
-//  ocServer.openFile(mapFilename);
-//  std::cout << "Map file opened." << std::endl;
-
-
-//  server.testLineMarker();
-  octomap::point3d center(0., 0., 0.);
-  octomath::Vector3 v(0,0,0);
-  octomath::Quaternion q(1,0,0,0);
-  octomath::Pose6D p6(v,q);
-  server.createInteractiveMarker(center);
-  server.createTextMarker(p6);
+  octomap_editing::OEServer server(0.05, mapFilename, "octomap_editing");
 
   ros::spin();
   return 0;

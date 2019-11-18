@@ -20,15 +20,22 @@ namespace octomap_editing
   {
 
   public:
-    OEServer(ros::NodeHandle nh, double resolution = 0.1, std::string update_topic = "octomap_editing");
+    OEServer(double resolution, std::string mapFilename, std::string update_topic);
+    void createControlMarker();
+    void createTextMarker();
 
-    void createInteractiveMarker(octomap::point3d center_coords);
-    void createTextMarker(octomath::Pose6D pose);
-    void openMapfile(std::string mapFilename);
+
+
+
     void testLineMarker();
 
   private:
-    void createMenu();
+    // reorganized functions
+    void openMapfile();
+
+
+
+    interactive_markers::MenuHandler createMenu();
     // menu callback functions
     void menuMoveAxisFeedback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback);
     void menuRotateAxisFeedback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback);
@@ -38,30 +45,29 @@ namespace octomap_editing
     void getPointCloudCallback(const sensor_msgs::PointCloud2 &pc);
     void publishPointCloud();
     octomap::pose6d getTransformationMatrix(bool transl);
-    geometry_msgs::Pose calculatePoseChange();
-    void updatePointCloud();
-    void refreshServer(geometry_msgs::Pose pose);
+    void refreshServer();
     void updateText(geometry_msgs::Pose pose);
+    void calculatePoseChange(geometry_msgs::Pose pose);
 
     interactive_markers::InteractiveMarkerServer _server;
     OEMarkerFactory _markerFactory;
-    interactive_markers::MenuHandler _menu_handler;
     std::vector<interactive_markers::MenuHandler::EntryHandle> _menu_entries;
     visualization_msgs::InteractiveMarker _imarker;
-    geometry_msgs::Pose _imarker_pose;
-    geometry_msgs::Pose _imarker_pose_md;
-    geometry_msgs::Pose _imarker_pose_mu;
-    geometry_msgs::Pose _imarker_pose_change;
-    geometry_msgs::Pose _imarker_pose_initial;
+    geometry_msgs::Pose _pointcloud_pose_change;
     visualization_msgs::InteractiveMarker _imarker_text;
 
-    std::map<uint, char> _menuentry_to_axis_map;
     ros::NodeHandle _nh;
     ros::Subscriber _sub;
     ros::Publisher _pub;
     ros::Publisher _marker_pub;
     octomap::Pointcloud _ocPointcloud;
     octomap::ColorOcTree _ocTree;
+
+    // reorganisation of the class ######################################
+    std::string _mapFilename;
+    std::map<std::string, std::shared_ptr<visualization_msgs::InteractiveMarker>> _markers;
+    std::map<std::string, std::shared_ptr<interactive_markers::MenuHandler>> _menus;
+    std::map<int, std::string> _mapping_menuentry_axis;
   };
 }
 #endif // OESERVER_HPP

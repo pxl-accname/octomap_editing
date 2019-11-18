@@ -59,6 +59,8 @@ OEMarkerFactory.hpp
 /home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEServer.cpp
 OEServer.hpp
 -
+map
+-
 
 /home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/octomap_editing.cpp
 ros/ros.h

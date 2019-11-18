@@ -6,101 +6,111 @@ namespace octomap_editing
     : _resolution(resolution)
   {}
 
-  visualization_msgs::Marker
-  OEMarkerFactory::makeTextMarker(std::string text)
+  // first type of marker
+  visualization_msgs::InteractiveMarker
+  OEMarkerFactory::createControlMarker()
   {
-    visualization_msgs::Marker text_marker;
-    text_marker.type = visualization_msgs::Marker::TEXT_VIEW_FACING;
+    visualization_msgs::InteractiveMarker imarker;
+    imarker.header = makeMarkerHeader();
+    imarker.pose = makeMarkerPose();
+    imarker.name = "imarker_pointcloud";  // + std::to_string(imarker.header.seq);
 
-    text_marker.scale.z = 0.15;
+    visualization_msgs::InteractiveMarkerControl menu = makeControl(visualization_msgs::InteractiveMarkerControl::MENU);
+    menu.markers.push_back(makeMarker(visualization_msgs::Marker::CUBE, ""));
+    imarker.controls.push_back(menu);
+    return imarker;
+  }
 
-    text_marker.color.r = 1;
-    text_marker.color.g = 0;
-    text_marker.color.b = 0;
-    text_marker.color.a = 1.0;
+  // second type of marker
+  visualization_msgs::InteractiveMarker
+  OEMarkerFactory::createTextMarker()
+  {
+    //lets try to create a text marker
+    visualization_msgs::InteractiveMarker imarker_text;
+    imarker_text.header = makeMarkerHeader();
+    imarker_text.pose = makeMarkerPose();
+    imarker_text.name = "imarker_text"; //_" + std::to_string(imarker_text.header.seq);
 
-    text_marker.text = text;
+    visualization_msgs::InteractiveMarkerControl control = makeControl(visualization_msgs::InteractiveMarkerControl::NONE);
+    std::string text = formatText(0, 0, 0, 0, 0, 0);
+    control.markers.push_back(makeMarker(visualization_msgs::Marker::TEXT_VIEW_FACING, text));
+    imarker_text.controls.push_back(control);
+    return imarker_text;
+  }
 
-    return text_marker;
+  // third type of marker
+  visualization_msgs::Marker
+  OEMarkerFactory::createOriginMarker()
+  {
+    visualization_msgs::Marker help_marker;
+    help_marker.action = visualization_msgs::Marker::ADD;
+    help_marker.color.r = 0.0;
+    help_marker.color.g = 1.0;
+    help_marker.color.b = 0.0;
+    help_marker.color.a = 1.0;
+    help_marker.header.stamp = ros::Time::now();
+    help_marker.header.frame_id = "map";
+    help_marker.header.seq = 999;
+    geometry_msgs::Point p;
+    p.x = p.y = 0.0;
+    p.z = 1.0;
+    help_marker.points.push_back(p);
+    p.z = -3.0;
+    help_marker.points.push_back(p);
+    help_marker.type = visualization_msgs::Marker::ARROW;
+    help_marker.scale.x = 0.5; // scale.x is the shaft diameter
+    help_marker.scale.y = 0.5; // scale.y is the head diameter
+    help_marker.scale.z = 0.25; // If scale.z is not zero, it specifies the head length.
+  }
+
+  geometry_msgs::Pose
+  OEMarkerFactory::makeMarkerPose()
+  {
+    geometry_msgs::Pose pose;
+    pose.position.x = 0;
+    pose.position.y = 0;
+    pose.position.z = 0;
+    pose.orientation.x = 0.0;
+    pose.orientation.y = 0.0;
+    pose.orientation.z = 0.0;
+    pose.orientation.w = 1.0;
+    return pose;
   }
 
   visualization_msgs::Marker
-  OEMarkerFactory::makeBoxMarker()
+  OEMarkerFactory::makeMarker(uint type, std::string text)
   {
-    visualization_msgs::Marker box_marker;
-    box_marker.type = visualization_msgs::Marker::CUBE;
-
-    box_marker.scale.x = 0.5 * static_cast<double>(_resolution);
-    box_marker.scale.y = 0.5 *static_cast<double>(_resolution);
-    box_marker.scale.z = 0.5 *static_cast<double>(_resolution);
-
-    box_marker.color.r = 1;
-    box_marker.color.g = 0;
-    box_marker.color.b = 0;
-    box_marker.color.a = 1.0;
-
-    return box_marker;
+    visualization_msgs::Marker marker;
+    marker.type = type;
+    marker.scale.x = 4 * _resolution;
+    marker.scale.y = 4 * _resolution;
+    marker.scale.z = 4 * _resolution;
+    marker.color.r = 1.0;
+    marker.color.g = 0.0;
+    marker.color.b = 0.0;
+    marker.color.a = 1.0;
+    marker.text = text;
+    return marker;
   }
 
-  visualization_msgs::Marker
-  OEMarkerFactory::makeHelpPlane()
+  std_msgs::Header
+  OEMarkerFactory::makeMarkerHeader()
   {
-    visualization_msgs::Marker help_plane;
-    help_plane.type = visualization_msgs::Marker::CUBE;
-
-    help_plane.scale.x = 2;
-    help_plane.scale.y = 2;
-    help_plane.scale.z = 0.05;
-
-    help_plane.color.r = 1;
-    help_plane.color.g = 0;
-    help_plane.color.b = 0;
-    help_plane.color.a = 1.0;
-
-    return help_plane;
+    std_msgs::Header header; // TODO: make this an argument
+    header.frame_id = "map";  // TODO: make this an argument
+    header.stamp = ros::Time::now();
+    header.seq = _marker_count++;
+    return header;
   }
 
   visualization_msgs::InteractiveMarkerControl
-  OEMarkerFactory::makeBoxControl(std::string text)
+  OEMarkerFactory::makeControl(uint control_mode, std::string name)
   {
-    visualization_msgs::InteractiveMarkerControl box_control;
-    box_control.always_visible = true;
-    box_control.markers.push_back(makeTextMarker(text));
-    return box_control;
-  }
-
-  void
-  OEMarkerFactory::createMarkerHeader(visualization_msgs::InteractiveMarker &imarker)
-  {
-    imarker.header.frame_id = "map";  // TODO: make this an argument
-    imarker.header.stamp = ros::Time::now();
-    imarker.header.seq = _i_marker_counter;
-    imarker.name = "Control marker" + std::to_string(_i_marker_counter);
-    ++_i_marker_counter;
-    //imarker.description = "Simple Interactive Marker with a context menu";  // TODO: add more information based on the used control!
-    // the description float over the marker in rviz -> ugly...
-    imarker.scale = static_cast<float>(_resolution);
-  }
-
-  void
-  OEMarkerFactory::createMarkerPose(visualization_msgs::InteractiveMarker &imarker, double x, double y, double z)
-  {
-    imarker.pose.position.x = x;
-    imarker.pose.position.y = y;
-    imarker.pose.position.z = z;
-  }
-
-  visualization_msgs::InteractiveMarker
-  OEMarkerFactory::createControlMarker(octomap::point3d center_coords, octomap_editing::Control_Mode control_mode)
-  {
-    visualization_msgs::InteractiveMarker imarker;
-    // same for all markers
-    createMarkerHeader(imarker);
-    createMarkerPose(imarker);
-
-    // create the desired interactive marker
-    makeInteractiveControl(imarker, control_mode);
-    return imarker;
+    visualization_msgs::InteractiveMarkerControl control;
+    control.interaction_mode = control_mode;
+    control.name = name;
+    control.always_visible = true;
+    return control;
   }
 
   std::string
@@ -117,57 +127,22 @@ namespace octomap_editing
     return text.str();
   }
 
-  visualization_msgs::InteractiveMarker
-  OEMarkerFactory::createTextMarker(octomap::pose6d pose)
-  {
-    //lets try to create a text marker
-    visualization_msgs::InteractiveMarker imarker_text;
-    createMarkerHeader(imarker_text);
-    createMarkerPose(imarker_text, 0, 0, 1);
-    std::string text = formatText(pose.x(), pose.y(), pose.z(), pose.roll(), pose.pitch(), pose.yaw());
-    imarker_text.controls.push_back(makeBoxControl(text));
-    return imarker_text;
-  }
-
-  void
-  OEMarkerFactory::makeInteractiveControl(visualization_msgs::InteractiveMarker &imarker, octomap_editing::Control_Mode control_mode)
-  {
-    switch(control_mode)
-    {
-//      case octomap_editing::MOVE_X_AXIS:
-//        createMoveAxisControl();
-//        break;
-
-      case octomap_editing::MENU:
-        createMenu(imarker); // TODO: maybe remove the controls again
-        break;
-    }
-  }
-
   visualization_msgs::InteractiveMarkerControl
-  OEMarkerFactory::createMoveAxisControl(char axis)
+  OEMarkerFactory::createMoveAxisControl(std::string axis)
   {
     double x = 0.0, y = 0.0, z = 0.0;
-    std::string name = "move_axis_";
-    name += axis;
 
-    switch (axis)
-    {
-      case 'x':
-        x = 1.0;
-        break;
+    if (axis == "move_X")
+      x = 1.0;
 
-      case 'y':
-        z = 1.0;
-        break;
+    if (axis == "move_Y")
+      z = 1.0;
 
-      case 'z':
-        y = 1.0;
-        break;
-    }
+    if (axis == "move_Z")
+      y = 1.0;
 
     visualization_msgs::InteractiveMarkerControl interactive_control;
-    interactive_control.name = name;
+    interactive_control.name = axis;
     interactive_control.interaction_mode = visualization_msgs::InteractiveMarkerControl::MOVE_AXIS;
     interactive_control.orientation_mode = visualization_msgs::InteractiveMarkerControl::FIXED;
     interactive_control.orientation.x = x;
@@ -179,29 +154,21 @@ namespace octomap_editing
   }
 
   visualization_msgs::InteractiveMarkerControl
-  OEMarkerFactory::createRotateAxisControl(char axis)
+  OEMarkerFactory::createRotateAxisControl(std::string axis)
   {
     double x = 0.0, y = 0.0, z = 0.0;
-    std::string name = "rotate_axis_";
-    name += axis;
 
-    switch (axis)
-    {
-      case 'x':
-        x = 1.0;
-        break;
+    if (axis == "rotate_X")
+      x = 1.0;
 
-      case 'y':
-        y = 1.0;
-        break;
+    if (axis == "rotate_Y")
+      z = 1.0;
 
-      case 'z':
-        z = 1.0;
-        break;
-    }
+    if (axis == "rotate_Z")
+      y = 1.0;
 
     visualization_msgs::InteractiveMarkerControl interactive_control;
-    interactive_control.name = name;
+    interactive_control.name = axis;
     interactive_control.interaction_mode = visualization_msgs::InteractiveMarkerControl::ROTATE_AXIS;
     interactive_control.orientation_mode = visualization_msgs::InteractiveMarkerControl::FIXED;
     interactive_control.orientation.x = x;
@@ -212,17 +179,4 @@ namespace octomap_editing
     return interactive_control;
   }
 
-  void
-  OEMarkerFactory::createMenu(visualization_msgs::InteractiveMarker &imarker)
-  {
-   visualization_msgs::InteractiveMarkerControl menu_control;
-   menu_control.interaction_mode = visualization_msgs::InteractiveMarkerControl::MENU;
-   menu_control.name = "context_menu";
-
-   menu_control.markers.push_back(makeBoxMarker());
-   // menu_control.markers.push_back(makeHelpPlane());
-   menu_control.always_visible = true;
-
-   imarker.controls.push_back(menu_control);
-  }
 }

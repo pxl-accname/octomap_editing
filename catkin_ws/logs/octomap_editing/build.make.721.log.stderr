@@ -1,0 +1,69 @@
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEMarkerFactory.cpp:177:3:[m[K [01;31m[Kerror: [m[Kprototype for '[01m[Kvisualization_msgs::InteractiveMarkerControl octomap_editing::OEMarkerFactory::makeControl(visualization_msgs::InteractiveMarkerControl, std::__cxx11::string)[m[K' does not match any in class '[01m[Koctomap_editing::OEMarkerFactory[m[K'
+   [01;31m[KOEMarkerFactory[m[K::makeControl(visualization_msgs::InteractiveMarkerControl control_mode, std::string name)
+   [01;31m[K^~~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEMarkerFactory.cpp:1:0[m[K:
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OEMarkerFactory.hpp:35:50:[m[K [01;31m[Kerror: [m[Kcandidate is: visualization_msgs::InteractiveMarkerControl octomap_editing::OEMarkerFactory::makeControl(uint, std::__cxx11::string)
+     visualization_msgs::InteractiveMarkerControl [01;31m[KmakeControl[m[K(uint control = visualization_msgs::InteractiveMarkerControl::NONE, std::string name = "");
+                                                  [01;31m[K^~~~~~~~~~~[m[K
+make[2]: *** [CMakeFiles/octomap_editing.dir/src/OEMarkerFactory.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+In file included from [01m[K/usr/local/include/boost/detail/endian.hpp:9:0[m[K,
+                 from [01m[K/usr/include/pcl-1.8/pcl/PCLPointCloud2.h:11[m[K,
+                 from [01m[K/usr/include/pcl-1.8/pcl/conversions.h:48[m[K,
+                 from [01m[K/opt/ros/melodic/include/pcl_ros/point_cloud.h:8[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OEServer.hpp:8[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEServer.cpp:1[m[K:
+[01m[K/usr/local/include/boost/predef/detail/endian_compat.h:11:161:[m[K [01;36m[Knote: [m[K#pragma message: The use of BOOST_*_ENDIAN and BOOST_BYTE_ORDER is deprecated. Please include <boost/predef/other/endian.h> and use BOOST_ENDIAN_*_BYTE instead
+ #pragma message("The use of BOOST_*_ENDIAN and BOOST_BYTE_ORDER is deprecated. Please include <boost/predef/other/endian.h> and use BOOST_ENDIAN_*_BYTE instead"[01;36m[K)[m[K
+                                                                                                                                                                 [01;36m[K^[m[K
+In file included from [01m[K/usr/local/include/boost/detail/endian.hpp:9:0[m[K,
+                 from [01m[K/usr/include/pcl-1.8/pcl/PCLPointCloud2.h:11[m[K,
+                 from [01m[K/usr/include/pcl-1.8/pcl/conversions.h:48[m[K,
+                 from [01m[K/opt/ros/melodic/include/pcl_ros/point_cloud.h:8[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OEServer.hpp:8[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/octomap_editing.cpp:2[m[K:
+[01m[K/usr/local/include/boost/predef/detail/endian_compat.h:11:161:[m[K [01;36m[Knote: [m[K#pragma message: The use of BOOST_*_ENDIAN and BOOST_BYTE_ORDER is deprecated. Please include <boost/predef/other/endian.h> and use BOOST_ENDIAN_*_BYTE instead
+ #pragma message("The use of BOOST_*_ENDIAN and BOOST_BYTE_ORDER is deprecated. Please include <boost/predef/other/endian.h> and use BOOST_ENDIAN_*_BYTE instead"[01;36m[K)[m[K
+                                                                                                                                                                 [01;36m[K^[m[K
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEServer.cpp:[m[K In member function '[01m[Kvoid octomap_editing::OEServer::createInteractiveMarker()[m[K':
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEServer.cpp:39:68:[m[K [01;31m[Kerror: [m[K'[01m[KMENU[m[K' is not a member of '[01m[Koctomap_editing[m[K'
+     _imarker = _markerFactory.createControlMarker(octomap_editing::[01;31m[KMENU[m[K);
+                                                                    [01;31m[K^~~~[m[K
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEServer.cpp:[m[K In member function '[01m[Kvoid octomap_editing::OEServer::updateText(geometry_msgs::Pose)[m[K':
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEServer.cpp:289:124:[m[K [01;31m[Kerror: [m[K'[01m[Kstd::__cxx11::string octomap_editing::OEMarkerFactory::formatText(double, double, double, double, double, double)[m[K' is private within this context
+     _imarker_text.controls[0].markers[0].text = _markerFactory.formatText(p.x(), p.y(), p.z(), p.roll(), p.pitch(), p.yaw()[01;31m[K)[m[K;
+                                                                                                                            [01;31m[K^[m[K
+In file included from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OEServer.hpp:7:0[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEServer.cpp:1[m[K:
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OEMarkerFactory.hpp:36:17:[m[K [01;36m[Knote: [m[Kdeclared private here
+     std::string [01;36m[KformatText[m[K(double x = 0, double y = 0, double z = 0, double roll = 0, double pitch = 0, double yaw = 0);
+                 [01;36m[K^~~~~~~~~~[m[K
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/octomap_editing.cpp:[m[K In function '[01m[Kint main(int, char**)[m[K':
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/octomap_editing.cpp:42:40:[m[K [01;31m[Kerror: [m[Kno matching function for call to '[01m[Koctomap_editing::OEServer::createInteractiveMarker(octomap::point3d&)[m[K'
+   server.createInteractiveMarker(center[01;31m[K)[m[K;
+                                        [01;31m[K^[m[K
+In file included from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/octomap_editing.cpp:2:0[m[K:
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OEServer.hpp:25:10:[m[K [01;36m[Knote: [m[Kcandidate: void octomap_editing::OEServer::createInteractiveMarker()
+     void [01;36m[KcreateInteractiveMarker[m[K();
+          [01;36m[K^~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OEServer.hpp:25:10:[m[K [01;36m[Knote: [m[K  candidate expects 0 arguments, 1 provided
+In file included from [01m[K/opt/ros/melodic/include/octomap_server/OctomapServer.h:49:0[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OEServer.hpp:12[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/octomap_editing.cpp:2[m[K:
+[01m[K/usr/include/pcl-1.8/pcl/sample_consensus/model_types.h:[m[K In function '[01m[Kvoid __static_initialization_and_destruction_0(int, int)[m[K':
+[01m[K/usr/include/pcl-1.8/pcl/sample_consensus/model_types.h:99:3:[m[K [01;35m[Kwarning: [m[K'[01m[Kpcl::SAC_SAMPLE_SIZE[m[K' is deprecated: This map is deprecated and is kept only to prevent breaking existing user code. Starting from PCL 1.8.0 model sample size is a protected member of the SampleConsensusModel class [[01;35m[K-Wdeprecated-declarations[m[K]
+   [01;35m[KSAC_SAMPLE_SIZE[m[K (sample_size_pairs, sample_size_pairs + sizeof (sample_size_pairs) / sizeof (SampleSizeModel));
+   [01;35m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/usr/include/pcl-1.8/pcl/sample_consensus/model_types.h:99:3:[m[K [01;36m[Knote: [m[Kdeclared here
+In file included from [01m[K/opt/ros/melodic/include/octomap_server/OctomapServer.h:49:0[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OEServer.hpp:12[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEServer.cpp:1[m[K:
+[01m[K/usr/include/pcl-1.8/pcl/sample_consensus/model_types.h:[m[K In function '[01m[Kvoid __static_initialization_and_destruction_0(int, int)[m[K':
+[01m[K/usr/include/pcl-1.8/pcl/sample_consensus/model_types.h:99:3:[m[K [01;35m[Kwarning: [m[K'[01m[Kpcl::SAC_SAMPLE_SIZE[m[K' is deprecated: This map is deprecated and is kept only to prevent breaking existing user code. Starting from PCL 1.8.0 model sample size is a protected member of the SampleConsensusModel class [[01;35m[K-Wdeprecated-declarations[m[K]
+   [01;35m[KSAC_SAMPLE_SIZE[m[K (sample_size_pairs, sample_size_pairs + sizeof (sample_size_pairs) / sizeof (SampleSizeModel));
+   [01;35m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/usr/include/pcl-1.8/pcl/sample_consensus/model_types.h:99:3:[m[K [01;36m[Knote: [m[Kdeclared here
+make[2]: *** [CMakeFiles/octomap_editing.dir/src/octomap_editing.cpp.o] Error 1
+make[2]: *** [CMakeFiles/octomap_editing.dir/src/OEServer.cpp.o] Error 1
+make[1]: *** [CMakeFiles/octomap_editing.dir/all] Error 2
+make: *** [all] Error 2

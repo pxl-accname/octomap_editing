@@ -9,39 +9,35 @@
 
 namespace octomap_editing
 {
-  enum Control_Mode { MOVE_X_AXIS = 0, MENU = 1 };
-
   // TODO: make this factory a singleton!
   class OEMarkerFactory
   {
   public:
     OEMarkerFactory(double resolution);
 
-    visualization_msgs::Marker makeBoxMarker();
-    visualization_msgs::Marker makeTextMarker(std::string text);
-    visualization_msgs::Marker makeHelpPlane();
-    visualization_msgs::InteractiveMarkerControl makeBoxControl(std::string text);
-    // visualization_msgs::InteractiveMarkerControl makeBoxControl();
-    void createMarkerHeader(visualization_msgs::InteractiveMarker &imarker);
-    void createMarkerPose(visualization_msgs::InteractiveMarker &imarker, double x = 0, double y = 0, double z = 0);
+    // function to create the control marker
+    visualization_msgs::InteractiveMarker createControlMarker();
+    visualization_msgs::Marker createOriginMarker();
+    visualization_msgs::InteractiveMarker createTextMarker();
 
-    visualization_msgs::InteractiveMarker createControlMarker(octomap::point3d center_coords, octomap_editing::Control_Mode control_mode);
-    visualization_msgs::InteractiveMarker createTextMarker(octomath::Pose6D pose);
-    void makeInteractiveControl(visualization_msgs::InteractiveMarker &imarker, octomap_editing::Control_Mode control_mode = MOVE_X_AXIS);
+    // different possible control types - added via OEServer
+    visualization_msgs::InteractiveMarkerControl createMoveAxisControl(std::string axis);
+    visualization_msgs::InteractiveMarkerControl createRotateAxisControl(std::string axis);
 
-    // formatting text for text marker
+    // needed by OEServer
     std::string formatText(double x = 0, double y = 0, double z = 0, double roll = 0, double pitch = 0, double yaw = 0);
-
-    // different possible control types
-    visualization_msgs::InteractiveMarkerControl createMoveAxisControl(char axis);
-    visualization_msgs::InteractiveMarkerControl createRotateAxisControl(char axis);
-    void createMenu(visualization_msgs::InteractiveMarker &imarker);
-
-    // methods called from server
-    void setResolution(double resolution) { _resolution = resolution; }
+    uint getNextSeq() { return _marker_count++; }
 
   private:
-    uint _i_marker_counter = 0;
+    void setResolution(double resolution) { _resolution = resolution; }
+
+    // used to create parts of the possible markers
+    std_msgs::Header makeMarkerHeader();
+    geometry_msgs::Pose makeMarkerPose();
+    visualization_msgs::Marker makeMarker(uint type = visualization_msgs::Marker::CUBE, std::string text = "");
+    visualization_msgs::InteractiveMarkerControl makeControl(uint control_mode = visualization_msgs::InteractiveMarkerControl::NONE, std::string name = "");
+
+    uint _marker_count = 0;
     double _resolution;
   };
 }

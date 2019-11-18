@@ -1,0 +1,57 @@
+In file included from [01m[K/usr/local/include/boost/detail/endian.hpp:9:0[m[K,
+                 from [01m[K/usr/include/pcl-1.8/pcl/PCLPointCloud2.h:11[m[K,
+                 from [01m[K/usr/include/pcl-1.8/pcl/conversions.h:48[m[K,
+                 from [01m[K/opt/ros/melodic/include/pcl_ros/point_cloud.h:8[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OEServer.hpp:8[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEServer.cpp:1[m[K:
+[01m[K/usr/local/include/boost/predef/detail/endian_compat.h:11:161:[m[K [01;36m[Knote: [m[K#pragma message: The use of BOOST_*_ENDIAN and BOOST_BYTE_ORDER is deprecated. Please include <boost/predef/other/endian.h> and use BOOST_ENDIAN_*_BYTE instead
+ #pragma message("The use of BOOST_*_ENDIAN and BOOST_BYTE_ORDER is deprecated. Please include <boost/predef/other/endian.h> and use BOOST_ENDIAN_*_BYTE instead"[01;36m[K)[m[K
+                                                                                                                                                                 [01;36m[K^[m[K
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEServer.cpp:[m[K In member function '[01m[Kvoid octomap_editing::OEServer::calculatePoseChange(geometry_msgs::Pose)[m[K':
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEServer.cpp:223:51:[m[K [01;31m[Kerror: [m[K'[01m[Kclass std::shared_ptr<visualization_msgs::InteractiveMarker_<std::allocator<void> > >[m[K' has no member named '[01m[Kposition[m[K'
+     _pointcloud_pose_change.position.x = (imarker.[01;31m[Kposition[m[K.x != new_pose.position.x) ? new_pose.position.x - imarker.position.x : 0;
+                                                   [01;31m[K^~~~~~~~[m[K
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEServer.cpp:223:118:[m[K [01;31m[Kerror: [m[K'[01m[Kclass std::shared_ptr<visualization_msgs::InteractiveMarker_<std::allocator<void> > >[m[K' has no member named '[01m[Kposition[m[K'
+     _pointcloud_pose_change.position.x = (imarker.position.x != new_pose.position.x) ? new_pose.position.x - imarker.[01;31m[Kposition[m[K.x : 0;
+                                                                                                                      [01;31m[K^~~~~~~~[m[K
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEServer.cpp:224:51:[m[K [01;31m[Kerror: [m[K'[01m[Kclass std::shared_ptr<visualization_msgs::InteractiveMarker_<std::allocator<void> > >[m[K' has no member named '[01m[Kposition[m[K'
+     _pointcloud_pose_change.position.y = (imarker.[01;31m[Kposition[m[K.y != new_pose.position.y) ? new_pose.position.y - imarker.position.y : 0;
+                                                   [01;31m[K^~~~~~~~[m[K
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEServer.cpp:224:118:[m[K [01;31m[Kerror: [m[K'[01m[Kclass std::shared_ptr<visualization_msgs::InteractiveMarker_<std::allocator<void> > >[m[K' has no member named '[01m[Kposition[m[K'
+     _pointcloud_pose_change.position.y = (imarker.position.y != new_pose.position.y) ? new_pose.position.y - imarker.[01;31m[Kposition[m[K.y : 0;
+                                                                                                                      [01;31m[K^~~~~~~~[m[K
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEServer.cpp:225:51:[m[K [01;31m[Kerror: [m[K'[01m[Kclass std::shared_ptr<visualization_msgs::InteractiveMarker_<std::allocator<void> > >[m[K' has no member named '[01m[Kposition[m[K'
+     _pointcloud_pose_change.position.z = (imarker.[01;31m[Kposition[m[K.z != new_pose.position.z) ? new_pose.position.z - imarker.position.z : 0;
+                                                   [01;31m[K^~~~~~~~[m[K
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEServer.cpp:225:118:[m[K [01;31m[Kerror: [m[K'[01m[Kclass std::shared_ptr<visualization_msgs::InteractiveMarker_<std::allocator<void> > >[m[K' has no member named '[01m[Kposition[m[K'
+     _pointcloud_pose_change.position.z = (imarker.position.z != new_pose.position.z) ? new_pose.position.z - imarker.[01;31m[Kposition[m[K.z : 0;
+                                                                                                                      [01;31m[K^~~~~~~~[m[K
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEServer.cpp:228:54:[m[K [01;31m[Kerror: [m[K'[01m[Kclass std::shared_ptr<visualization_msgs::InteractiveMarker_<std::allocator<void> > >[m[K' has no member named '[01m[Korientation[m[K'
+     _pointcloud_pose_change.orientation.x = (imarker.[01;31m[Korientation[m[K.x != new_pose.orientation.x) ? new_pose.orientation.x - imarker.orientation.x : 0;
+                                                      [01;31m[K^~~~~~~~~~~[m[K
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEServer.cpp:228:130:[m[K [01;31m[Kerror: [m[K'[01m[Kclass std::shared_ptr<visualization_msgs::InteractiveMarker_<std::allocator<void> > >[m[K' has no member named '[01m[Korientation[m[K'
+     _pointcloud_pose_change.orientation.x = (imarker.orientation.x != new_pose.orientation.x) ? new_pose.orientation.x - imarker.[01;31m[Korientation[m[K.x : 0;
+                                                                                                                                  [01;31m[K^~~~~~~~~~~[m[K
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEServer.cpp:229:54:[m[K [01;31m[Kerror: [m[K'[01m[Kclass std::shared_ptr<visualization_msgs::InteractiveMarker_<std::allocator<void> > >[m[K' has no member named '[01m[Korientation[m[K'
+     _pointcloud_pose_change.orientation.y = (imarker.[01;31m[Korientation[m[K.y != new_pose.orientation.y) ? new_pose.orientation.y - imarker.orientation.y : 0;
+                                                      [01;31m[K^~~~~~~~~~~[m[K
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEServer.cpp:229:130:[m[K [01;31m[Kerror: [m[K'[01m[Kclass std::shared_ptr<visualization_msgs::InteractiveMarker_<std::allocator<void> > >[m[K' has no member named '[01m[Korientation[m[K'
+     _pointcloud_pose_change.orientation.y = (imarker.orientation.y != new_pose.orientation.y) ? new_pose.orientation.y - imarker.[01;31m[Korientation[m[K.y : 0;
+                                                                                                                                  [01;31m[K^~~~~~~~~~~[m[K
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEServer.cpp:230:54:[m[K [01;31m[Kerror: [m[K'[01m[Kclass std::shared_ptr<visualization_msgs::InteractiveMarker_<std::allocator<void> > >[m[K' has no member named '[01m[Korientation[m[K'
+     _pointcloud_pose_change.orientation.z = (imarker.[01;31m[Korientation[m[K.z != new_pose.orientation.z) ? new_pose.orientation.z - imarker.orientation.z : 0;
+                                                      [01;31m[K^~~~~~~~~~~[m[K
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEServer.cpp:230:130:[m[K [01;31m[Kerror: [m[K'[01m[Kclass std::shared_ptr<visualization_msgs::InteractiveMarker_<std::allocator<void> > >[m[K' has no member named '[01m[Korientation[m[K'
+     _pointcloud_pose_change.orientation.z = (imarker.orientation.z != new_pose.orientation.z) ? new_pose.orientation.z - imarker.[01;31m[Korientation[m[K.z : 0;
+                                                                                                                                  [01;31m[K^~~~~~~~~~~[m[K
+In file included from [01m[K/opt/ros/melodic/include/octomap_server/OctomapServer.h:49:0[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OEServer.hpp:12[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEServer.cpp:1[m[K:
+[01m[K/usr/include/pcl-1.8/pcl/sample_consensus/model_types.h:[m[K In function '[01m[Kvoid __static_initialization_and_destruction_0(int, int)[m[K':
+[01m[K/usr/include/pcl-1.8/pcl/sample_consensus/model_types.h:99:3:[m[K [01;35m[Kwarning: [m[K'[01m[Kpcl::SAC_SAMPLE_SIZE[m[K' is deprecated: This map is deprecated and is kept only to prevent breaking existing user code. Starting from PCL 1.8.0 model sample size is a protected member of the SampleConsensusModel class [[01;35m[K-Wdeprecated-declarations[m[K]
+   [01;35m[KSAC_SAMPLE_SIZE[m[K (sample_size_pairs, sample_size_pairs + sizeof (sample_size_pairs) / sizeof (SampleSizeModel));
+   [01;35m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/usr/include/pcl-1.8/pcl/sample_consensus/model_types.h:99:3:[m[K [01;36m[Knote: [m[Kdeclared here
+make[2]: *** [CMakeFiles/octomap_editing.dir/src/OEServer.cpp.o] Error 1
+make[1]: *** [CMakeFiles/octomap_editing.dir/all] Error 2
+make: *** [all] Error 2
