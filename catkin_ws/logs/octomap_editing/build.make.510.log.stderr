@@ -1,0 +1,10 @@
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEMarkerFactory.cpp:86:3:[m[K [01;31m[Kerror: [m[Kprototype for '[01m[Kvoid octomap_editing::OEMarkerFactory::createMarkerPose(visualization_msgs::InteractiveMarker&)[m[K' does not match any in class '[01m[Koctomap_editing::OEMarkerFactory[m[K'
+   [01;31m[KOEMarkerFactory[m[K::createMarkerPose(visualization_msgs::InteractiveMarker &imarker)
+   [01;31m[K^~~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEMarkerFactory.cpp:1:0[m[K:
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OEMarkerFactory.hpp:26:10:[m[K [01;31m[Kerror: [m[Kcandidate is: void octomap_editing::OEMarkerFactory::createMarkerPose(visualization_msgs::InteractiveMarker&, double, double, double)
+     void [01;31m[KcreateMarkerPose[m[K(visualization_msgs::InteractiveMarker &imarker, double x = 0, double y = 0, double z = 0);
+          [01;31m[K^~~~~~~~~~~~~~~~[m[K
+make[2]: *** [CMakeFiles/octomap_editing.dir/src/OEMarkerFactory.cpp.o] Error 1
+make[1]: *** [CMakeFiles/octomap_editing.dir/all] Error 2
+make: *** [all] Error 2

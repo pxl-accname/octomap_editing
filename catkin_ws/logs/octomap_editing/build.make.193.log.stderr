@@ -1,0 +1,25 @@
+In file included from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEIO.cpp:1:0[m[K:
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OEIO.hpp:19:10:[m[K [01;31m[Kerror: [m[K'[01m[Kunique_ptr[m[K' in namespace '[01m[Kstd[m[K' does not name a template type
+     std::[01;31m[Kunique_ptr[m[K<octomap::ColorOcTree> _cocTree = nullptr;
+          [01;31m[K^~~~~~~~~~[m[K
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEIO.cpp:[m[K In member function '[01m[Kbool octomap_editing::OEIO::openFile(std::__cxx11::string)[m[K':
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEIO.cpp:42:9:[m[K [01;31m[Kerror: [m[K'[01m[K_cocTree[m[K' was not declared in this scope
+     if ([01;31m[K_cocTree[m[K == nullptr) {
+         [01;31m[K^~~~~~~~[m[K
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEIO.cpp:44:23:[m[K [01;31m[Kerror: [m[K'[01m[Kmake_unique[m[K' is not a member of '[01m[Kstd[m[K'
+       _cocTree = std::[01;31m[Kmake_unique[m[K<octomap::ColorOcTree>(1.0);
+                       [01;31m[K^~~~~~~~~~~[m[K
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEIO.cpp:44:23:[m[K [01;36m[Knote: [m[Ksuggested alternative: '[01m[K__unique[m[K'
+       _cocTree = std::[01;36m[Kmake_unique[m[K<octomap::ColorOcTree>(1.0);
+                       [01;36m[K^~~~~~~~~~~[m[K
+                       [32m[K__unique[m[K
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEIO.cpp:44:55:[m[K [01;31m[Kerror: [m[Kexpected primary-expression before '[01m[K>[m[K' token
+       _cocTree = std::make_unique<octomap::ColorOcTree[01;31m[K>[m[K(1.0);
+                                                       [01;31m[K^[m[K
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEIO.cpp:47:9:[m[K [01;31m[Kerror: [m[K'[01m[K_cocTree[m[K' was not declared in this scope
+     if ([01;31m[K_cocTree[m[K->readBinary(_filename))
+         [01;31m[K^~~~~~~~[m[K
+make[2]: *** [CMakeFiles/octomap_editing.dir/src/OEIO.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+make[1]: *** [CMakeFiles/octomap_editing.dir/all] Error 2
+make: *** [all] Error 2

@@ -1,0 +1,89 @@
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/octomap_editing.cpp:[m[K In function '[01m[Kint main(int, char**)[m[K':
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/octomap_editing.cpp:104:48:[m[K [01;31m[Kerror: [m[Kno matching function for call to '[01m[Kstd::__cxx11::basic_string<char>::insert(visualization_msgs::InteractiveMarker&, void (*)(const InteractiveMarkerFeedbackConstPtr&))[m[K'
+     server->insert(int_marker, &processFeedback[01;31m[K)[m[K;
+                                                [01;31m[K^[m[K
+In file included from [01m[K/usr/include/c++/7/string:52:0[m[K,
+                 from [01m[K/usr/include/c++/7/bits/locale_classes.h:40[m[K,
+                 from [01m[K/usr/include/c++/7/bits/ios_base.h:41[m[K,
+                 from [01m[K/usr/include/c++/7/ios:42[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OctomapEditing.hpp:4[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/octomap_editing.cpp:1[m[K:
+[01m[K/usr/include/c++/7/bits/basic_string.h:1523:7:[m[K [01;36m[Knote: [m[Kcandidate: std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::iterator std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::insert(std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::const_iterator, std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::size_type, _CharT) [with _CharT = char; _Traits = std::char_traits<char>; _Alloc = std::allocator<char>; std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::iterator = __gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char> >; typename __gnu_cxx::__alloc_traits<typename __gnu_cxx::__alloc_traits<_Alloc>::rebind<_CharT>::other>::pointer = char*; std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::const_iterator = __gnu_cxx::__normal_iterator<const char*, std::__cxx11::basic_string<char> >; typename __gnu_cxx::__alloc_traits<typename __gnu_cxx::__alloc_traits<_Alloc>::rebind<_CharT>::other>::const_pointer = const char*; std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::size_type = long unsigned int]
+       [01;36m[Kinsert[m[K(const_iterator __p, size_type __n, _CharT __c)
+       [01;36m[K^~~~~~[m[K
+[01m[K/usr/include/c++/7/bits/basic_string.h:1523:7:[m[K [01;36m[Knote: [m[K  candidate expects 3 arguments, 2 provided
+[01m[K/usr/include/c++/7/bits/basic_string.h:1567:9:[m[K [01;36m[Knote: [m[Kcandidate: template<class _InputIterator, class> std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::iterator std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::insert(std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::const_iterator, _InputIterator, _InputIterator) [with _InputIterator = _InputIterator; <template-parameter-2-2> = <template-parameter-1-2>; _CharT = char; _Traits = std::char_traits<char>; _Alloc = std::allocator<char>]
+         [01;36m[Kinsert[m[K(const_iterator __p, _InputIterator __beg, _InputIterator __end)
+         [01;36m[K^~~~~~[m[K
+[01m[K/usr/include/c++/7/bits/basic_string.h:1567:9:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/octomap_editing.cpp:104:48:[m[K [01;36m[Knote: [m[K  candidate expects 3 arguments, 2 provided
+     server->insert(int_marker, &processFeedback[01;36m[K)[m[K;
+                                                [01;36m[K^[m[K
+In file included from [01m[K/usr/include/c++/7/string:52:0[m[K,
+                 from [01m[K/usr/include/c++/7/bits/locale_classes.h:40[m[K,
+                 from [01m[K/usr/include/c++/7/bits/ios_base.h:41[m[K,
+                 from [01m[K/usr/include/c++/7/ios:42[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OctomapEditing.hpp:4[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/octomap_editing.cpp:1[m[K:
+[01m[K/usr/include/c++/7/bits/basic_string.h:1601:7:[m[K [01;36m[Knote: [m[Kcandidate: void std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::insert(std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::iterator, std::initializer_list<_Tp>) [with _CharT = char; _Traits = std::char_traits<char>; _Alloc = std::allocator<char>; std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::iterator = __gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char> >; typename __gnu_cxx::__alloc_traits<typename __gnu_cxx::__alloc_traits<_Alloc>::rebind<_CharT>::other>::pointer = char*]
+       [01;36m[Kinsert[m[K(iterator __p, initializer_list<_CharT> __l)
+       [01;36m[K^~~~~~[m[K
+[01m[K/usr/include/c++/7/bits/basic_string.h:1601:7:[m[K [01;36m[Knote: [m[K  no known conversion for argument 1 from '[01m[Kvisualization_msgs::InteractiveMarker {aka visualization_msgs::InteractiveMarker_<std::allocator<void> >}[m[K' to '[01m[Kstd::__cxx11::basic_string<char>::iterator {aka __gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char> >}[m[K'
+[01m[K/usr/include/c++/7/bits/basic_string.h:1621:7:[m[K [01;36m[Knote: [m[Kcandidate: std::__cxx11::basic_string<_CharT, _Traits, _Alloc>& std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::insert(std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::size_type, const std::__cxx11::basic_string<_CharT, _Traits, _Alloc>&) [with _CharT = char; _Traits = std::char_traits<char>; _Alloc = std::allocator<char>; std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::size_type = long unsigned int]
+       [01;36m[Kinsert[m[K(size_type __pos1, const basic_string& __str)
+       [01;36m[K^~~~~~[m[K
+[01m[K/usr/include/c++/7/bits/basic_string.h:1621:7:[m[K [01;36m[Knote: [m[K  no known conversion for argument 1 from '[01m[Kvisualization_msgs::InteractiveMarker {aka visualization_msgs::InteractiveMarker_<std::allocator<void> >}[m[K' to '[01m[Kstd::__cxx11::basic_string<char>::size_type {aka long unsigned int}[m[K'
+[01m[K/usr/include/c++/7/bits/basic_string.h:1644:7:[m[K [01;36m[Knote: [m[Kcandidate: std::__cxx11::basic_string<_CharT, _Traits, _Alloc>& std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::insert(std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::size_type, const std::__cxx11::basic_string<_CharT, _Traits, _Alloc>&, std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::size_type, std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::size_type) [with _CharT = char; _Traits = std::char_traits<char>; _Alloc = std::allocator<char>; std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::size_type = long unsigned int]
+       [01;36m[Kinsert[m[K(size_type __pos1, const basic_string& __str,
+       [01;36m[K^~~~~~[m[K
+[01m[K/usr/include/c++/7/bits/basic_string.h:1644:7:[m[K [01;36m[Knote: [m[K  candidate expects 4 arguments, 2 provided
+[01m[K/usr/include/c++/7/bits/basic_string.h:1667:7:[m[K [01;36m[Knote: [m[Kcandidate: std::__cxx11::basic_string<_CharT, _Traits, _Alloc>& std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::insert(std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::size_type, const _CharT*, std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::size_type) [with _CharT = char; _Traits = std::char_traits<char>; _Alloc = std::allocator<char>; std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::size_type = long unsigned int]
+       [01;36m[Kinsert[m[K(size_type __pos, const _CharT* __s, size_type __n)
+       [01;36m[K^~~~~~[m[K
+[01m[K/usr/include/c++/7/bits/basic_string.h:1667:7:[m[K [01;36m[Knote: [m[K  candidate expects 3 arguments, 2 provided
+[01m[K/usr/include/c++/7/bits/basic_string.h:1686:7:[m[K [01;36m[Knote: [m[Kcandidate: std::__cxx11::basic_string<_CharT, _Traits, _Alloc>& std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::insert(std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::size_type, const _CharT*) [with _CharT = char; _Traits = std::char_traits<char>; _Alloc = std::allocator<char>; std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::size_type = long unsigned int]
+       [01;36m[Kinsert[m[K(size_type __pos, const _CharT* __s)
+       [01;36m[K^~~~~~[m[K
+[01m[K/usr/include/c++/7/bits/basic_string.h:1686:7:[m[K [01;36m[Knote: [m[K  no known conversion for argument 1 from '[01m[Kvisualization_msgs::InteractiveMarker {aka visualization_msgs::InteractiveMarker_<std::allocator<void> >}[m[K' to '[01m[Kstd::__cxx11::basic_string<char>::size_type {aka long unsigned int}[m[K'
+[01m[K/usr/include/c++/7/bits/basic_string.h:1710:7:[m[K [01;36m[Knote: [m[Kcandidate: std::__cxx11::basic_string<_CharT, _Traits, _Alloc>& std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::insert(std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::size_type, std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::size_type, _CharT) [with _CharT = char; _Traits = std::char_traits<char>; _Alloc = std::allocator<char>; std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::size_type = long unsigned int]
+       [01;36m[Kinsert[m[K(size_type __pos, size_type __n, _CharT __c)
+       [01;36m[K^~~~~~[m[K
+[01m[K/usr/include/c++/7/bits/basic_string.h:1710:7:[m[K [01;36m[Knote: [m[K  candidate expects 3 arguments, 2 provided
+[01m[K/usr/include/c++/7/bits/basic_string.h:1728:7:[m[K [01;36m[Knote: [m[Kcandidate: std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::iterator std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::insert(std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::__const_iterator, _CharT) [with _CharT = char; _Traits = std::char_traits<char>; _Alloc = std::allocator<char>; std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::iterator = __gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char> >; typename __gnu_cxx::__alloc_traits<typename __gnu_cxx::__alloc_traits<_Alloc>::rebind<_CharT>::other>::pointer = char*; std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::__const_iterator = __gnu_cxx::__normal_iterator<const char*, std::__cxx11::basic_string<char> >; typename __gnu_cxx::__alloc_traits<typename __gnu_cxx::__alloc_traits<_Alloc>::rebind<_CharT>::other>::const_pointer = const char*]
+       [01;36m[Kinsert[m[K(__const_iterator __p, _CharT __c)
+       [01;36m[K^~~~~~[m[K
+[01m[K/usr/include/c++/7/bits/basic_string.h:1728:7:[m[K [01;36m[Knote: [m[K  no known conversion for argument 1 from '[01m[Kvisualization_msgs::InteractiveMarker {aka visualization_msgs::InteractiveMarker_<std::allocator<void> >}[m[K' to '[01m[Kstd::__cxx11::basic_string<char>::__const_iterator {aka __gnu_cxx::__normal_iterator<const char*, std::__cxx11::basic_string<char> >}[m[K'
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/octomap_editing.cpp:105:24:[m[K [01;31m[Kerror: [m[Kcannot bind non-const lvalue reference of type '[01m[Kinteractive_markers::InteractiveMarkerServer&[m[K' to an rvalue of type '[01m[Kinteractive_markers::InteractiveMarkerServer[m[K'
+     menu_handler.apply([01;31m[K*server[m[K, int_marker.name );
+                        [01;31m[K^~~~~~~[m[K
+In file included from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/octomap_editing.cpp:3:0[m[K:
+[01m[K/opt/ros/melodic/include/interactive_markers/interactive_marker_server.h:72:3:[m[K [01;36m[Knote: [m[K  after user-defined conversion: interactive_markers::InteractiveMarkerServer::InteractiveMarkerServer(const string&, const string&, bool)
+   [01;36m[KInteractiveMarkerServer[m[K( const std::string &topic_ns, const std::string &server_id="", bool spin_thread = false );
+   [01;36m[K^~~~~~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/octomap_editing.cpp:4:0[m[K:
+[01m[K/opt/ros/melodic/include/interactive_markers/menu_handler.h:92:8:[m[K [01;36m[Knote: [m[K  initializing argument 1 of '[01m[Kbool interactive_markers::MenuHandler::apply(interactive_markers::InteractiveMarkerServer&, const string&)[m[K'
+   bool [01;36m[Kapply[m[K( InteractiveMarkerServer &server, const std::string &marker_name );
+        [01;36m[K^~~~~[m[K
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/octomap_editing.cpp:109:11:[m[K [01;31m[Kerror: [m[K'[01m[Kusing element_type = class std::__cxx11::basic_string<char> {aka class std::__cxx11::basic_string<char>}[m[K' has no member named '[01m[KapplyChanges[m[K'
+   server->[01;31m[KapplyChanges[m[K();
+           [01;31m[K^~~~~~~~~~~~[m[K
+In file included from [01m[K/usr/local/include/boost/function/detail/maybe_include.hpp:22:0[m[K,
+                 from [01m[K/usr/local/include/boost/function/detail/function_iterate.hpp:14[m[K,
+                 from [01m[K/usr/local/include/boost/preprocessor/iteration/detail/iter/forward1.hpp:52[m[K,
+                 from [01m[K/usr/local/include/boost/function.hpp:70[m[K,
+                 from [01m[K/opt/ros/melodic/include/ros/forwards.h:40[m[K,
+                 from [01m[K/opt/ros/melodic/include/ros/common.h:37[m[K,
+                 from [01m[K/opt/ros/melodic/include/ros/ros.h:43[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OctomapEditing.hpp:6[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/octomap_editing.cpp:1[m[K:
+/usr/local/include/boost/function/function_template.hpp: In instantiation of '[01m[Kstatic void boost::detail::function::void_function_invoker1<FunctionPtr, R, T0>::invoke(boost::detail::function::function_buffer&, T0) [with FunctionPtr = void (*)(); R = void; T0 = const boost::shared_ptr<const visualization_msgs::InteractiveMarkerFeedback_<std::allocator<void> > >&][m[K':
+[01m[K/usr/local/include/boost/function/function_template.hpp:931:38:[m[K   required from '[01m[Kvoid boost::function1<R, T1>::assign_to(Functor) [with Functor = void (*)(); R = void; T0 = const boost::shared_ptr<const visualization_msgs::InteractiveMarkerFeedback_<std::allocator<void> > >&][m[K'
+[01m[K/usr/local/include/boost/function/function_template.hpp:720:7:[m[K   required from '[01m[Kboost::function1<R, T1>::function1(Functor, typename boost::enable_if_<(! boost::is_integral<Functor>::value), int>::type) [with Functor = void (*)(); R = void; T0 = const boost::shared_ptr<const visualization_msgs::InteractiveMarkerFeedback_<std::allocator<void> > >&; typename boost::enable_if_<(! boost::is_integral<Functor>::value), int>::type = int][m[K'
+[01m[K/usr/local/include/boost/function/function_template.hpp:1068:16:[m[K   required from '[01m[Kboost::function<R(T0)>::function(Functor, typename boost::enable_if_<(! boost::is_integral<Functor>::value), int>::type) [with Functor = void (*)(); R = void; T0 = const boost::shared_ptr<const visualization_msgs::InteractiveMarkerFeedback_<std::allocator<void> > >&; typename boost::enable_if_<(! boost::is_integral<Functor>::value), int>::type = int][m[K'
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/octomap_editing.cpp:44:56:[m[K   required from here
+[01m[K/usr/local/include/boost/function/function_template.hpp:117:11:[m[K [01;31m[Kerror: [m[Ktoo many arguments to function
+           [01;31m[KB[m[KOOST_FUNCTION_RETURN(f(BOOST_FUNCTION_ARGS));
+           [01;31m[K^[m[K
+make[2]: *** [CMakeFiles/octomap_editing.dir/src/octomap_editing.cpp.o] Error 1
+make[1]: *** [CMakeFiles/octomap_editing.dir/all] Error 2
+make: *** [all] Error 2

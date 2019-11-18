@@ -1,0 +1,5 @@
+[01m[Kc++:[m[K [01;31m[Kerror: [m[K$(CMAKE_CXX_FLAGS): No such file or directory
+make[2]: *** [/home/accname/programming/ROS/octomap_editing/catkin_ws/devel/.private/octomap_editing/lib/octomap_editing/octomap_editing] Error 1
+make[1]: *** [CMakeFiles/octomap_editing.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+make: *** [all] Error 2

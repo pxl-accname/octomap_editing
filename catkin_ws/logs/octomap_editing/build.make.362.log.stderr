@@ -1,0 +1,9 @@
+In file included from [01m[K/usr/local/include/boost/detail/endian.hpp:9:0[m[K,
+                 from [01m[K/usr/include/pcl-1.8/pcl/PCLPointCloud2.h:11[m[K,
+                 from [01m[K/usr/include/pcl-1.8/pcl/conversions.h:48[m[K,
+                 from [01m[K/opt/ros/melodic/include/pcl_ros/point_cloud.h:8[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OEServer.hpp:8[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEServer.cpp:1[m[K:
+[01m[K/usr/local/include/boost/predef/detail/endian_compat.h:11:161:[m[K [01;36m[Knote: [m[K#pragma message: The use of BOOST_*_ENDIAN and BOOST_BYTE_ORDER is deprecated. Please include <boost/predef/other/endian.h> and use BOOST_ENDIAN_*_BYTE instead
+ #pragma message("The use of BOOST_*_ENDIAN and BOOST_BYTE_ORDER is deprecated. Please include <boost/predef/other/endian.h> and use BOOST_ENDIAN_*_BYTE instead"[01;36m[K)[m[K
+                                                                                                                                                                 [01;36m[K^[m[K

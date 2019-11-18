@@ -1,0 +1,147 @@
+In file included from [01m[K/usr/local/include/boost/detail/endian.hpp:9:0[m[K,
+                 from [01m[K/usr/include/pcl-1.8/pcl/PCLPointCloud2.h:11[m[K,
+                 from [01m[K/usr/include/pcl-1.8/pcl/conversions.h:48[m[K,
+                 from [01m[K/opt/ros/melodic/include/pcl_ros/point_cloud.h:8[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OEServer.hpp:8[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEServer.cpp:1[m[K:
+[01m[K/usr/local/include/boost/predef/detail/endian_compat.h:11:161:[m[K [01;36m[Knote: [m[K#pragma message: The use of BOOST_*_ENDIAN and BOOST_BYTE_ORDER is deprecated. Please include <boost/predef/other/endian.h> and use BOOST_ENDIAN_*_BYTE instead
+ #pragma message("The use of BOOST_*_ENDIAN and BOOST_BYTE_ORDER is deprecated. Please include <boost/predef/other/endian.h> and use BOOST_ENDIAN_*_BYTE instead"[01;36m[K)[m[K
+                                                                                                                                                                 [01;36m[K^[m[K
+In file included from [01m[K/usr/local/include/boost/detail/endian.hpp:9:0[m[K,
+                 from [01m[K/usr/include/pcl-1.8/pcl/PCLPointCloud2.h:11[m[K,
+                 from [01m[K/usr/include/pcl-1.8/pcl/conversions.h:48[m[K,
+                 from [01m[K/opt/ros/melodic/include/pcl_ros/point_cloud.h:8[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OEServer.hpp:8[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/octomap_editing.cpp:2[m[K:
+[01m[K/usr/local/include/boost/predef/detail/endian_compat.h:11:161:[m[K [01;36m[Knote: [m[K#pragma message: The use of BOOST_*_ENDIAN and BOOST_BYTE_ORDER is deprecated. Please include <boost/predef/other/endian.h> and use BOOST_ENDIAN_*_BYTE instead
+ #pragma message("The use of BOOST_*_ENDIAN and BOOST_BYTE_ORDER is deprecated. Please include <boost/predef/other/endian.h> and use BOOST_ENDIAN_*_BYTE instead"[01;36m[K)[m[K
+                                                                                                                                                                 [01;36m[K^[m[K
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEServer.cpp:[m[K In member function '[01m[Kvoid octomap_editing::OEServer::menuMoveAxisFeedback(const InteractiveMarkerFeedbackConstPtr&)[m[K':
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEServer.cpp:160:7:[m[K [01;31m[Kerror: [m[Kexpected primary-expression before '[01m[Kfor[m[K'
+       [01;31m[Kfor[m[K (auto it = marker->controls.begin(), end = marker->controls.end(); it != end; ++it)
+       [01;31m[K^~~[m[K
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEServer.cpp:160:78:[m[K [01;31m[Kerror: [m[K'[01m[Kit[m[K' was not declared in this scope
+       for (auto it = marker->controls.begin(), end = marker->controls.end(); [01;31m[Kit[m[K != end; ++it)
+                                                                              [01;31m[K^~[m[K
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEServer.cpp:160:78:[m[K [01;36m[Knote: [m[Ksuggested alternative: '[01m[Kint[m[K'
+       for (auto it = marker->controls.begin(), end = marker->controls.end(); [01;36m[Kit[m[K != end; ++it)
+                                                                              [01;36m[K^~[m[K
+                                                                              [32m[Kint[m[K
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEServer.cpp:160:84:[m[K [01;31m[Kerror: [m[K'[01m[Kend[m[K' was not declared in this scope
+       for (auto it = marker->controls.begin(), end = marker->controls.end(); it != [01;31m[Kend[m[K; ++it)
+                                                                                    [01;31m[K^~~[m[K
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEServer.cpp:160:84:[m[K [01;36m[Knote: [m[Ksuggested alternatives:
+In file included from [01m[K/usr/include/c++/7/string:51:0[m[K,
+                 from [01m[K/opt/ros/melodic/include/visualization_msgs/InteractiveMarkerUpdate.h:9[m[K,
+                 from [01m[K/opt/ros/melodic/include/interactive_markers/interactive_marker_server.h:35[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OEServer.hpp:4[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEServer.cpp:1[m[K:
+[01m[K/usr/include/c++/7/bits/range_access.h:107:37:[m[K [01;36m[Knote: [m[K  '[01m[Kstd::end[m[K'
+   template<typename _Tp> const _Tp* [01;36m[Kend[m[K(const valarray<_Tp>&);
+                                     [01;36m[K^~~[m[K
+In file included from [01m[K/usr/local/include/boost/range/functions.hpp:19:0[m[K,
+                 from [01m[K/usr/local/include/boost/range/iterator_range_core.hpp:38[m[K,
+                 from [01m[K/usr/local/include/boost/lexical_cast.hpp:30[m[K,
+                 from [01m[K/opt/ros/melodic/include/ros/transport_hints.h:34[m[K,
+                 from [01m[K/opt/ros/melodic/include/ros/subscribe_options.h:33[m[K,
+                 from [01m[K/opt/ros/melodic/include/ros/node_handle.h:42[m[K,
+                 from [01m[K/opt/ros/melodic/include/ros/ros.h:45[m[K,
+                 from [01m[K/opt/ros/melodic/include/interactive_markers/interactive_marker_server.h:42[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OEServer.hpp:4[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEServer.cpp:1[m[K:
+[01m[K/usr/local/include/boost/range/end.hpp:108:61:[m[K [01;36m[Knote: [m[K  '[01m[Kboost::range_adl_barrier::end[m[K'
+ inline BOOST_DEDUCED_TYPENAME range_iterator<const T>::type [01;36m[Kend[m[K( const T& r )
+                                                             [01;36m[K^~~[m[K
+In file included from [01m[K/usr/local/include/boost/mpl/list/aux_/begin_end.hpp:17:0[m[K,
+                 from [01m[K/usr/local/include/boost/mpl/list/list0.hpp:27[m[K,
+                 from [01m[K/usr/local/include/boost/mpl/list/list10.hpp:18[m[K,
+                 from [01m[K/usr/local/include/boost/mpl/list/list20.hpp:18[m[K,
+                 from [01m[K/usr/local/include/boost/mpl/list.hpp:36[m[K,
+                 from [01m[K/usr/local/include/boost/math/policies/policy.hpp:9[m[K,
+                 from [01m[K/usr/local/include/boost/math/policies/error_handling.hpp:21[m[K,
+                 from [01m[K/usr/local/include/boost/math/special_functions/round.hpp:14[m[K,
+                 from [01m[K/opt/ros/melodic/include/ros/time.h:58[m[K,
+                 from [01m[K/opt/ros/melodic/include/ros/serialization.h:34[m[K,
+                 from [01m[K/opt/ros/melodic/include/visualization_msgs/InteractiveMarkerUpdate.h:14[m[K,
+                 from [01m[K/opt/ros/melodic/include/interactive_markers/interactive_marker_server.h:35[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OEServer.hpp:4[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEServer.cpp:1[m[K:
+[01m[K/usr/local/include/boost/mpl/begin_end_fwd.hpp:23:38:[m[K [01;36m[Knote: [m[K  '[01m[Kboost::mpl::end[m[K'
+ template< typename Sequence > struct [01;36m[Kend[m[K;
+                                      [01;36m[K^~~[m[K
+In file included from [01m[K/usr/local/include/boost/range/functions.hpp:19:0[m[K,
+                 from [01m[K/usr/local/include/boost/range/iterator_range_core.hpp:38[m[K,
+                 from [01m[K/usr/local/include/boost/lexical_cast.hpp:30[m[K,
+                 from [01m[K/opt/ros/melodic/include/ros/transport_hints.h:34[m[K,
+                 from [01m[K/opt/ros/melodic/include/ros/subscribe_options.h:33[m[K,
+                 from [01m[K/opt/ros/melodic/include/ros/node_handle.h:42[m[K,
+                 from [01m[K/opt/ros/melodic/include/ros/ros.h:45[m[K,
+                 from [01m[K/opt/ros/melodic/include/interactive_markers/interactive_marker_server.h:42[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OEServer.hpp:4[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEServer.cpp:1[m[K:
+[01m[K/usr/local/include/boost/range/end.hpp:108:61:[m[K [01;36m[Knote: [m[K  '[01m[Kboost::range_adl_barrier::end[m[K'
+ inline BOOST_DEDUCED_TYPENAME range_iterator<const T>::type [01;36m[Kend[m[K( const T& r )
+                                                             [01;36m[K^~~[m[K
+In file included from [01m[K/usr/include/pcl-1.8/pcl/conversions.h:56:0[m[K,
+                 from [01m[K/opt/ros/melodic/include/pcl_ros/point_cloud.h:8[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OEServer.hpp:8[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEServer.cpp:1[m[K:
+[01m[K/usr/local/include/boost/foreach.hpp:729:1:[m[K [01;36m[Knote: [m[K  '[01m[Kboost::foreach_detail_::end[m[K'
+ [01;36m[Kend[m[K(auto_any_t, type2type<T *, C> *, boost::mpl::true_ *) // null-terminated C-style strings
+ [01;36m[K^~~[m[K
+In file included from [01m[K/usr/local/include/boost/filesystem.hpp:17:0[m[K,
+                 from [01m[K/usr/include/pcl-1.8/pcl/io/boost.h:53[m[K,
+                 from [01m[K/usr/include/pcl-1.8/pcl/io/file_io.h:43[m[K,
+                 from [01m[K/usr/include/pcl-1.8/pcl/io/pcd_io.h:44[m[K,
+                 from [01m[K/opt/ros/melodic/include/pcl_conversions/pcl_conversions.h:70[m[K,
+                 from [01m[K/opt/ros/melodic/include/pcl_ros/point_cloud.h:9[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OEServer.hpp:8[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEServer.cpp:1[m[K:
+[01m[K/usr/local/include/boost/filesystem/operations.hpp:1367:32:[m[K [01;36m[Knote: [m[K  '[01m[Kboost::filesystem::end[m[K'
+   recursive_directory_iterator [01;36m[Kend[m[K(const recursive_directory_iterator&) BOOST_NOEXCEPT
+                                [01;36m[K^~~[m[K
+In file included from [01m[K/usr/local/include/boost/fusion/mpl/back.hpp:12:0[m[K,
+                 from [01m[K/usr/local/include/boost/fusion/mpl.hpp:15[m[K,
+                 from [01m[K/usr/local/include/boost/fusion/include/mpl.hpp:12[m[K,
+                 from [01m[K/usr/include/pcl-1.8/pcl/common/impl/accumulators.hpp:44[m[K,
+                 from [01m[K/usr/include/pcl-1.8/pcl/common/centroid.h:954[m[K,
+                 from [01m[K/usr/include/pcl-1.8/pcl/common/transforms.h:44[m[K,
+                 from [01m[K/opt/ros/melodic/include/pcl_ros/transforms.h:41[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OEServer.hpp:11[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEServer.cpp:1[m[K:
+[01m[K/usr/local/include/boost/fusion/sequence/intrinsic/end.hpp:92:5:[m[K [01;36m[Knote: [m[K  '[01m[Kboost::fusion::end[m[K'
+     [01;36m[Kend[m[K(Sequence const& seq)
+     [01;36m[K^~~[m[K
+In file included from [01m[K/usr/local/include/boost/fusion/sequence/intrinsic/value_at.hpp:16:0[m[K,
+                 from [01m[K/usr/local/include/boost/fusion/mpl/at.hpp:12[m[K,
+                 from [01m[K/usr/local/include/boost/fusion/mpl.hpp:14[m[K,
+                 from [01m[K/usr/local/include/boost/fusion/include/mpl.hpp:12[m[K,
+                 from [01m[K/usr/include/pcl-1.8/pcl/common/impl/accumulators.hpp:44[m[K,
+                 from [01m[K/usr/include/pcl-1.8/pcl/common/centroid.h:954[m[K,
+                 from [01m[K/usr/include/pcl-1.8/pcl/common/transforms.h:44[m[K,
+                 from [01m[K/opt/ros/melodic/include/pcl_ros/transforms.h:41[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OEServer.hpp:11[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEServer.cpp:1[m[K:
+[01m[K/usr/local/include/boost/fusion/sequence/intrinsic_fwd.hpp:68:16:[m[K [01;36m[Knote: [m[K  '[01m[Kboost::fusion::result_of::end[m[K'
+         struct [01;36m[Kend[m[K;
+                [01;36m[K^~~[m[K
+In file included from [01m[K/opt/ros/melodic/include/octomap_server/OctomapServer.h:49:0[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OEServer.hpp:12[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OEServer.cpp:1[m[K:
+[01m[K/usr/include/pcl-1.8/pcl/sample_consensus/model_types.h:[m[K In function '[01m[Kvoid __static_initialization_and_destruction_0(int, int)[m[K':
+[01m[K/usr/include/pcl-1.8/pcl/sample_consensus/model_types.h:99:3:[m[K [01;35m[Kwarning: [m[K'[01m[Kpcl::SAC_SAMPLE_SIZE[m[K' is deprecated: This map is deprecated and is kept only to prevent breaking existing user code. Starting from PCL 1.8.0 model sample size is a protected member of the SampleConsensusModel class [[01;35m[K-Wdeprecated-declarations[m[K]
+   [01;35m[KSAC_SAMPLE_SIZE[m[K (sample_size_pairs, sample_size_pairs + sizeof (sample_size_pairs) / sizeof (SampleSizeModel));
+   [01;35m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/usr/include/pcl-1.8/pcl/sample_consensus/model_types.h:99:3:[m[K [01;36m[Knote: [m[Kdeclared here
+In file included from [01m[K/opt/ros/melodic/include/octomap_server/OctomapServer.h:49:0[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OEServer.hpp:12[m[K,
+                 from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/octomap_editing.cpp:2[m[K:
+[01m[K/usr/include/pcl-1.8/pcl/sample_consensus/model_types.h:[m[K In function '[01m[Kvoid __static_initialization_and_destruction_0(int, int)[m[K':
+[01m[K/usr/include/pcl-1.8/pcl/sample_consensus/model_types.h:99:3:[m[K [01;35m[Kwarning: [m[K'[01m[Kpcl::SAC_SAMPLE_SIZE[m[K' is deprecated: This map is deprecated and is kept only to prevent breaking existing user code. Starting from PCL 1.8.0 model sample size is a protected member of the SampleConsensusModel class [[01;35m[K-Wdeprecated-declarations[m[K]
+   [01;35m[KSAC_SAMPLE_SIZE[m[K (sample_size_pairs, sample_size_pairs + sizeof (sample_size_pairs) / sizeof (SampleSizeModel));
+   [01;35m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/usr/include/pcl-1.8/pcl/sample_consensus/model_types.h:99:3:[m[K [01;36m[Knote: [m[Kdeclared here
+make[2]: *** [CMakeFiles/octomap_editing.dir/src/OEServer.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+make[1]: *** [CMakeFiles/octomap_editing.dir/all] Error 2
+make: *** [all] Error 2

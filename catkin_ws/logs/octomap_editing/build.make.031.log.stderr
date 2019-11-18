@@ -1,0 +1,14 @@
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/octomap_editing.cpp:[m[K In function '[01m[Kint main(int, char**)[m[K':
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/octomap_editing.cpp:31:3:[m[K [01;31m[Kerror: [m[K'[01m[KOctomapEditing[m[K' has not been declared
+   [01;31m[KOctomapEditing[m[K::OctomapEditing test;
+   [01;31m[K^~~~~~~~~~~~~~[m[K
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/octomap_editing.cpp:32:3:[m[K [01;31m[Kerror: [m[K'[01m[Ktest[m[K' was not declared in this scope
+   [01;31m[Ktest[m[K.openFile(mapFilename);
+   [01;31m[K^~~~[m[K
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/octomap_editing.cpp:32:3:[m[K [01;36m[Knote: [m[Ksuggested alternative: '[01m[Ktzset[m[K'
+   [01;36m[Ktest[m[K.openFile(mapFilename);
+   [01;36m[K^~~~[m[K
+   [32m[Ktzset[m[K
+make[2]: *** [CMakeFiles/octomap_editing.dir/src/octomap_editing.cpp.o] Error 1
+make[1]: *** [CMakeFiles/octomap_editing.dir/all] Error 2
+make: *** [all] Error 2

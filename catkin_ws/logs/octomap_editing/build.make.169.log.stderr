@@ -1,0 +1,15 @@
+In file included from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/OctomapEditingServer.cpp:1:0[m[K:
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OctomapEditingServer.hpp:16:4:[m[K [01;31m[Kerror: [m[Kexpected '[01m[K;[m[K' after class definition
+   }
+    [01;31m[K^[m[K
+    [32m[K;[m[K
+In file included from [01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/octomap_editing.cpp:2:0[m[K:
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/include/OctomapEditingServer.hpp:16:4:[m[K [01;31m[Kerror: [m[Kexpected '[01m[K;[m[K' after class definition
+   }
+    [01;31m[K^[m[K
+    [32m[K;[m[K
+make[2]: *** [CMakeFiles/octomap_editing.dir/src/OctomapEditingServer.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+make[2]: *** [CMakeFiles/octomap_editing.dir/src/octomap_editing.cpp.o] Error 1
+make[1]: *** [CMakeFiles/octomap_editing.dir/all] Error 2
+make: *** [all] Error 2

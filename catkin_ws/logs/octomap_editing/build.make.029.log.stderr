@@ -1,0 +1,7 @@
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/octomap_editing.cpp:[m[K In function '[01m[Kint main(int, char**)[m[K':
+[01m[K/home/accname/programming/ROS/octomap_editing/catkin_ws/src/octomap_editing/src/octomap_editing.cpp:32:8:[m[K [01;31m[Kerror: [m[Krequest for member '[01m[KopenFile[m[K' in '[01m[Ktest[m[K', which is of non-class type '[01m[KOctomapEditing::OctomapEditing()[m[K'
+   test.[01;31m[KopenFile[m[K(mapFilename);
+        [01;31m[K^~~~~~~~[m[K
+make[2]: *** [CMakeFiles/octomap_editing.dir/src/octomap_editing.cpp.o] Error 1
+make[1]: *** [CMakeFiles/octomap_editing.dir/all] Error 2
+make: *** [all] Error 2
