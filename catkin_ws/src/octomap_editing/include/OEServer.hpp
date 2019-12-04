@@ -13,6 +13,8 @@
 #include <octomap_ros/conversions.h>
 #include <sensor_msgs/point_cloud_conversion.h>
 #include <sensor_msgs/point_cloud2_iterator.h>
+#include <OECube.hpp>
+
 
 namespace octomap_editing
 {
@@ -21,8 +23,9 @@ namespace octomap_editing
 
   public:
     OEServer(double resolution, std::string mapFilename, std::string update_topic);
-    void createControlMarker();
-    void createTextMarker();
+    void createControlMarker(std::string name = "");
+    void createTextMarker(std::string name = "");
+    void createCube();
 
 
 
@@ -70,6 +73,7 @@ namespace octomap_editing
     std::map<std::string, std::shared_ptr<visualization_msgs::InteractiveMarker>> _markers;
     std::map<std::string, std::shared_ptr<interactive_markers::MenuHandler>> _menus;
     std::map<int, std::string> _mapping_menuentry_axis;
+    OECube _cube;
   };
 }
 #endif // OESERVER_HPP

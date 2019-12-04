@@ -1,6 +1,8 @@
 #include <ros/ros.h>
 #include <OEServer.hpp>
 #include <octomap_server/OctomapServer.h>
+#include <string>
+#include <bitset>
 
 #include <interactive_markers/interactive_marker_server.h>
 #include <interactive_markers/menu_handler.h>

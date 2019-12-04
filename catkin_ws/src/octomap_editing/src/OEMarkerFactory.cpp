@@ -8,12 +8,12 @@ namespace octomap_editing
 
   // first type of marker
   visualization_msgs::InteractiveMarker
-  OEMarkerFactory::createControlMarker()
+  OEMarkerFactory::createControlMarker(std::string name, double x, double y, double z)
   {
     visualization_msgs::InteractiveMarker imarker;
     imarker.header = makeMarkerHeader();
-    imarker.pose = makeMarkerPose();
-    imarker.name = "imarker_pointcloud";  // + std::to_string(imarker.header.seq);
+    imarker.pose = makeMarkerPose(x, y, z);
+    imarker.name = name;  // + std::to_string(imarker.header.seq);
 
     visualization_msgs::InteractiveMarkerControl menu = makeControl(visualization_msgs::InteractiveMarkerControl::MENU);
     menu.markers.push_back(makeMarker(visualization_msgs::Marker::CUBE, ""));
@@ -21,15 +21,32 @@ namespace octomap_editing
     return imarker;
   }
 
+  visualization_msgs::InteractiveMarker
+  OEMarkerFactory::createCubeMarker(std::string name, double x, double y, double z)
+  {
+    visualization_msgs::InteractiveMarker imarker;
+    imarker.header = makeMarkerHeader();
+    imarker.pose = makeMarkerPose(x, y, z);
+    imarker.name = name;
+
+    imarker.controls.push_back(makeControl());
+    imarker.controls[0].markers.push_back(makeMarker(visualization_msgs::Marker::CUBE, ""));
+
+    imarker.controls.push_back(makeMoveControl(1,0,0));
+    imarker.controls.push_back(makeMoveControl(0,1,0));
+    imarker.controls.push_back(makeMoveControl(0,0,1));
+    return imarker;
+  }
+
   // second type of marker
   visualization_msgs::InteractiveMarker
-  OEMarkerFactory::createTextMarker()
+  OEMarkerFactory::createTextMarker(std::string name, double x, double y, double z)
   {
     //lets try to create a text marker
     visualization_msgs::InteractiveMarker imarker_text;
     imarker_text.header = makeMarkerHeader();
-    imarker_text.pose = makeMarkerPose();
-    imarker_text.name = "imarker_text"; //_" + std::to_string(imarker_text.header.seq);
+    imarker_text.pose = makeMarkerPose(x, y, z);
+    imarker_text.name = name; //_" + std::to_string(imarker_text.header.seq);
 
     visualization_msgs::InteractiveMarkerControl control = makeControl(visualization_msgs::InteractiveMarkerControl::NONE);
     std::string text = formatText(0, 0, 0, 0, 0, 0);
@@ -64,12 +81,12 @@ namespace octomap_editing
   }
 
   geometry_msgs::Pose
-  OEMarkerFactory::makeMarkerPose()
+  OEMarkerFactory::makeMarkerPose(double x, double y, double z)
   {
     geometry_msgs::Pose pose;
-    pose.position.x = 0;
-    pose.position.y = 0;
-    pose.position.z = 0;
+    pose.position.x = x;
+    pose.position.y = y;
+    pose.position.z = z;
     pose.orientation.x = 0.0;
     pose.orientation.y = 0.0;
     pose.orientation.z = 0.0;
@@ -113,6 +130,20 @@ namespace octomap_editing
     return control;
   }
 
+  visualization_msgs::InteractiveMarkerControl
+  OEMarkerFactory::makeMoveControl(double x, double y, double z)
+  {
+    visualization_msgs::InteractiveMarkerControl control;
+    control.interaction_mode = visualization_msgs::InteractiveMarkerControl::MOVE_AXIS;
+    control.orientation_mode = visualization_msgs::InteractiveMarkerControl::FIXED;
+    control.orientation.x = x;
+    control.orientation.y = y;
+    control.orientation.z = z;
+    control.orientation.w = 1;
+    control.always_visible = true;
+    return control;
+  }
+
   std::string
   OEMarkerFactory::formatText(double x , double y, double z, double roll, double pitch, double yaw)
   {
@@ -151,6 +182,32 @@ namespace octomap_editing
     interactive_control.orientation.w = 1;
     interactive_control.always_visible = true;
     return interactive_control;
+  }
+
+  std::vector<std::shared_ptr<OECubeMarker>>
+  OEMarkerFactory::makeCubeMarkers()
+  {
+    std::vector<std::shared_ptr<OECubeMarker>> markers;
+    markers.push_back(std::make_shared<OECubeMarker>("000", createCubeMarker("000", 0, 0, 0)));
+    markers.push_back(std::make_shared<OECubeMarker>("100", createCubeMarker("100", 1, 0, 0)));
+    markers.push_back(std::make_shared<OECubeMarker>("101", createCubeMarker("101", 1, 0, 1)));
+    markers.push_back(std::make_shared<OECubeMarker>("010", createCubeMarker("010", 0, 0, 1)));
+
+    markers.push_back(std::make_shared<OECubeMarker>("001", createCubeMarker("001", 0, 1, 0)));
+    markers.push_back(std::make_shared<OECubeMarker>("110", createCubeMarker("110", 1, 1, 0)));
+    markers.push_back(std::make_shared<OECubeMarker>("111", createCubeMarker("111", 1, 1, 1)));
+    markers.push_back(std::make_shared<OECubeMarker>("011", createCubeMarker("011", 0, 1, 1)));
+    return markers;
+  }
+
+  OECube
+  OEMarkerFactory::createCube()
+  {
+    OECube cube;
+    cube.setCubeMarkers(makeCubeMarkers());
+    cube.determineNeighbourMarkers();
+    cube.createLines();
+    return cube;
   }
 
   visualization_msgs::InteractiveMarkerControl

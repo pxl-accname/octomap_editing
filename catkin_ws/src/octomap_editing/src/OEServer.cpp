@@ -17,17 +17,17 @@ namespace octomap_editing
   {
     m_publishFreeSpace = true;
 
-    openMapfile();
-
-    // initially needed markers
-    createControlMarker();
-    createTextMarker();
-
     _sub = _nh.subscribe("/octomap_point_cloud_centers", 1000, &octomap_editing::OEServer::getPointCloudCallback, this);
     _marker_pub = _nh.advertise<visualization_msgs::Marker>("/visualization_marker", 10);
 
-    _server.applyChanges();
-    // maybe even refreshServer()
+    openMapfile();
+    // initially needed markers
+//    createControlMarker("test1");
+//    createControlMarker("test2");
+//    createTextMarker("imarker_text");
+    createCube();
+
+    refreshServer();
   }
 
   void
@@ -188,10 +188,17 @@ namespace octomap_editing
   }
 
   void
-  OEServer::createControlMarker()
+  OEServer::createCube()
+  {
+    // create the whole cube
+    _cube = _markerFactory.createCube();
+  }
+
+  void
+  OEServer::createControlMarker(std::string name)
   {
     // creates the interactive marker
-    visualization_msgs::InteractiveMarker control_marker = _markerFactory.createControlMarker();
+    visualization_msgs::InteractiveMarker control_marker = _markerFactory.createControlMarker(name);
     _markers[control_marker.name] = std::make_shared<visualization_msgs::InteractiveMarker>(control_marker);
 
     // creates the menu
@@ -209,9 +216,9 @@ namespace octomap_editing
   }
 
   void
-  OEServer::createTextMarker()
+  OEServer::createTextMarker(std::string name)
   {
-    visualization_msgs::InteractiveMarker text_marker = _markerFactory.createTextMarker();
+    visualization_msgs::InteractiveMarker text_marker = _markerFactory.createTextMarker(name);
     _markers[text_marker.name] = std::make_shared<visualization_msgs::InteractiveMarker>(text_marker);
     _server.insert(*_markers[text_marker.name]);
   }
@@ -284,6 +291,18 @@ namespace octomap_editing
     for (auto it = _markers.begin(), end = _markers.end(); it != end; ++it)
     {
       _server.insert(*(it->second));
+    }
+
+    std::vector<std::shared_ptr<OECubeMarker>> cube_markers = _cube.getCubeMarkers();
+    for (auto it = cube_markers.begin(), end = cube_markers.end(); it != end; ++it)
+    {
+      _server.insert((*it)->getMarker());
+    }
+
+    std::vector<std::shared_ptr<OECubeLine>> lines = _cube.getLines();
+    for (auto it = lines.begin(), end = lines.end(); it != end; ++it)
+    {
+      // _server.insert((*it)->getMarker());
     }
 
     for (auto it = _menus.begin(), end = _menus.end(); it != end; ++it)

@@ -6,6 +6,8 @@
 #include <visualization_msgs/InteractiveMarkerControl.h>
 #include <octomap/ColorOcTree.h>
 #include <OEMarker.hpp>
+#include <OECubeMarker.hpp>
+#include <OECube.hpp>
 
 namespace octomap_editing
 {
@@ -16,9 +18,11 @@ namespace octomap_editing
     OEMarkerFactory(double resolution);
 
     // function to create the control marker
-    visualization_msgs::InteractiveMarker createControlMarker();
+    visualization_msgs::InteractiveMarker createControlMarker(std::string name = "", double x = 0.0, double y = 0.0, double z = 0.0);
     visualization_msgs::Marker createOriginMarker();
-    visualization_msgs::InteractiveMarker createTextMarker();
+    visualization_msgs::InteractiveMarker createTextMarker(std::string name = "", double x = 0.0, double y = 0.0, double z = 0.0);
+    OECube createCube();
+
 
     // different possible control types - added via OEServer
     visualization_msgs::InteractiveMarkerControl createMoveAxisControl(std::string axis);
@@ -30,10 +34,13 @@ namespace octomap_editing
 
   private:
     void setResolution(double resolution) { _resolution = resolution; }
+    std::vector<std::shared_ptr<OECubeMarker>> makeCubeMarkers();
+    visualization_msgs::InteractiveMarker createCubeMarker(std::string name, double x, double y, double z);
+    visualization_msgs::InteractiveMarkerControl makeMoveControl(double x = 1.0, double y = 0.0, double z = 0.0);
 
     // used to create parts of the possible markers
     std_msgs::Header makeMarkerHeader();
-    geometry_msgs::Pose makeMarkerPose();
+    geometry_msgs::Pose makeMarkerPose(double x = 0.0, double y = 0.0, double z = 0.0);
     visualization_msgs::Marker makeMarker(uint type = visualization_msgs::Marker::CUBE, std::string text = "");
     visualization_msgs::InteractiveMarkerControl makeControl(uint control_mode = visualization_msgs::InteractiveMarkerControl::NONE, std::string name = "");
 
