@@ -21,7 +21,7 @@ namespace octomap_editing
     return imarker;
   }
 
-  visualization_msgs::InteractiveMarker
+  std::shared_ptr<visualization_msgs::InteractiveMarker>
   OEMarkerFactory::createCubeMarker(std::string name, double x, double y, double z)
   {
     visualization_msgs::InteractiveMarker imarker;
@@ -35,7 +35,7 @@ namespace octomap_editing
     imarker.controls.push_back(makeMoveControl(1,0,0));
     imarker.controls.push_back(makeMoveControl(0,1,0));
     imarker.controls.push_back(makeMoveControl(0,0,1));
-    return imarker;
+    return std::make_shared<visualization_msgs::InteractiveMarker>(imarker);
   }
 
   // second type of marker
@@ -87,9 +87,6 @@ namespace octomap_editing
     pose.position.x = x;
     pose.position.y = y;
     pose.position.z = z;
-    pose.orientation.x = 0.0;
-    pose.orientation.y = 0.0;
-    pose.orientation.z = 0.0;
     pose.orientation.w = 1.0;
     return pose;
   }
@@ -116,7 +113,7 @@ namespace octomap_editing
     std_msgs::Header header; // TODO: make this an argument
     header.frame_id = "map";  // TODO: make this an argument
     header.stamp = ros::Time::now();
-    header.seq = _marker_count++;
+    header.seq = getNextSeq();
     return header;
   }
 
@@ -188,15 +185,16 @@ namespace octomap_editing
   OEMarkerFactory::makeCubeMarkers()
   {
     std::vector<std::shared_ptr<OECubeMarker>> markers;
-    markers.push_back(std::make_shared<OECubeMarker>("000", createCubeMarker("000", 0, 0, 0)));
-    markers.push_back(std::make_shared<OECubeMarker>("100", createCubeMarker("100", 1, 0, 0)));
-    markers.push_back(std::make_shared<OECubeMarker>("101", createCubeMarker("101", 1, 0, 1)));
-    markers.push_back(std::make_shared<OECubeMarker>("010", createCubeMarker("010", 0, 0, 1)));
+    markers.push_back(std::make_shared<OECubeMarker>("000", createCubeMarker("000", 0, 0, 0), getNextSeq()));
+    markers.push_back(std::make_shared<OECubeMarker>("100", createCubeMarker("100", 1, 0, 0), getNextSeq()));
+    markers.push_back(std::make_shared<OECubeMarker>("010", createCubeMarker("010", 0, 1, 0), getNextSeq()));
+    markers.push_back(std::make_shared<OECubeMarker>("110", createCubeMarker("110", 1, 1, 0), getNextSeq()));
 
-    markers.push_back(std::make_shared<OECubeMarker>("001", createCubeMarker("001", 0, 1, 0)));
-    markers.push_back(std::make_shared<OECubeMarker>("110", createCubeMarker("110", 1, 1, 0)));
-    markers.push_back(std::make_shared<OECubeMarker>("111", createCubeMarker("111", 1, 1, 1)));
-    markers.push_back(std::make_shared<OECubeMarker>("011", createCubeMarker("011", 0, 1, 1)));
+    markers.push_back(std::make_shared<OECubeMarker>("001", createCubeMarker("001", 0, 0, 1), getNextSeq()));
+    markers.push_back(std::make_shared<OECubeMarker>("101", createCubeMarker("101", 1, 0, 1), getNextSeq()));
+    markers.push_back(std::make_shared<OECubeMarker>("011", createCubeMarker("011", 0, 1, 1), getNextSeq()));
+    markers.push_back(std::make_shared<OECubeMarker>("111", createCubeMarker("111", 1, 1, 1), getNextSeq()));
+
     return markers;
   }
 

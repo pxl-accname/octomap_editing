@@ -14,6 +14,7 @@
 #include <sensor_msgs/point_cloud_conversion.h>
 #include <sensor_msgs/point_cloud2_iterator.h>
 #include <OECube.hpp>
+#include <map>
 
 
 namespace octomap_editing
@@ -26,11 +27,6 @@ namespace octomap_editing
     void createControlMarker(std::string name = "");
     void createTextMarker(std::string name = "");
     void createCube();
-
-
-
-
-    void testLineMarker();
 
   private:
     // reorganized functions
@@ -47,6 +43,7 @@ namespace octomap_editing
     void resetChangesFeedback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback);
     void menuAddRemoveMoveAxisFeedback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback);
     void menuAddRemoveRotateAxisFeedback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback);
+    void processCubeMarkerFeedback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback);
     void getPointCloudCallback(const sensor_msgs::PointCloud2 &pc);
     void publishPointCloud();
     octomap::pose6d getTransformationMatrix(bool transl);

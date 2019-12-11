@@ -35,7 +35,7 @@ namespace octomap_editing
   private:
     void setResolution(double resolution) { _resolution = resolution; }
     std::vector<std::shared_ptr<OECubeMarker>> makeCubeMarkers();
-    visualization_msgs::InteractiveMarker createCubeMarker(std::string name, double x, double y, double z);
+    std::shared_ptr<visualization_msgs::InteractiveMarker> createCubeMarker(std::string name, double x, double y, double z);
     visualization_msgs::InteractiveMarkerControl makeMoveControl(double x = 1.0, double y = 0.0, double z = 0.0);
 
     // used to create parts of the possible markers

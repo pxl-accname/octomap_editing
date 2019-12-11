@@ -1,6 +1,4 @@
 #include <OEServer.hpp>
-#include <map>
-
 
 using namespace interactive_markers;
 
@@ -18,15 +16,13 @@ namespace octomap_editing
     m_publishFreeSpace = true;
 
     _sub = _nh.subscribe("/octomap_point_cloud_centers", 1000, &octomap_editing::OEServer::getPointCloudCallback, this);
-    _marker_pub = _nh.advertise<visualization_msgs::Marker>("/visualization_marker", 10);
+    _marker_pub = _nh.advertise<visualization_msgs::Marker>("/visualization_marker", 1);
 
     openMapfile();
     // initially needed markers
-//    createControlMarker("test1");
-//    createControlMarker("test2");
-//    createTextMarker("imarker_text");
+    createControlMarker("imarker_pointcloud");
+    createTextMarker("imarker_text");
     createCube();
-
     refreshServer();
   }
 
@@ -192,13 +188,19 @@ namespace octomap_editing
   {
     // create the whole cube
     _cube = _markerFactory.createCube();
+    std::vector<std::shared_ptr<OECubeMarker>> cube_markers = _cube.getCubeMarkers();
+    for (auto it = cube_markers.begin(), end = cube_markers.end(); it != end; ++it)
+    {
+      _markers[(*it)->getMarker()->name] = (*it)->getMarker();
+      _server.insert(*(*it)->getMarker(), boost::bind(&octomap_editing::OEServer::processCubeMarkerFeedback, this, _1));
+    }
   }
 
   void
   OEServer::createControlMarker(std::string name)
   {
     // creates the interactive marker
-    visualization_msgs::InteractiveMarker control_marker = _markerFactory.createControlMarker(name);
+    visualization_msgs::InteractiveMarker control_marker = _markerFactory.createControlMarker(name, 2, 2, 2);
     _markers[control_marker.name] = std::make_shared<visualization_msgs::InteractiveMarker>(control_marker);
 
     // creates the menu
@@ -296,14 +298,16 @@ namespace octomap_editing
     std::vector<std::shared_ptr<OECubeMarker>> cube_markers = _cube.getCubeMarkers();
     for (auto it = cube_markers.begin(), end = cube_markers.end(); it != end; ++it)
     {
-      _server.insert((*it)->getMarker());
+      std::shared_ptr<visualization_msgs::InteractiveMarker> marker = (*it)->getMarker();
+      _server.insert(*marker);
     }
 
-    std::vector<std::shared_ptr<OECubeLine>> lines = _cube.getLines();
-    for (auto it = lines.begin(), end = lines.end(); it != end; ++it)
-    {
-      // _server.insert((*it)->getMarker());
-    }
+    // create one line list and publish that
+    visualization_msgs::Marker lines = _cube.getLines(_markerFactory.getNextSeq());
+    _marker_pub.publish(lines);
+
+    visualization_msgs::Marker triangles = _cube.getTriangles(_markerFactory.getNextSeq());
+    _marker_pub.publish(triangles);
 
     for (auto it = _menus.begin(), end = _menus.end(); it != end; ++it)
     {
@@ -432,8 +436,6 @@ namespace octomap_editing
     refreshServer();
   }
 
-
-
   void
   OEServer::resetChangesFeedback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback)
   {
@@ -467,42 +469,61 @@ namespace octomap_editing
   }
 
   void
-  OEServer::testLineMarker()
+  OEServer::processCubeMarkerFeedback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback)
   {
-
-    visualization_msgs::Marker line_list;
-    line_list.header.frame_id = "map";
-    line_list.header.stamp = ros::Time::now();
-    line_list.ns = "";
-    line_list.action = visualization_msgs::Marker::ADD;
-    line_list.pose.orientation.w = 1.0;
-    line_list.id = 2;
-    line_list.type = visualization_msgs::Marker::LINE_LIST;
-
-    // LINE_STRIP/LINE_LIST markers use only the x component of scale, for the line width
-    line_list.scale.x = 0.1;
-    // Line list is red
-    line_list.color.r = 1.0;
-    line_list.color.a = 1.0;
-
-
-
-    // Create the vertices for the points and lines
-    for (uint32_t i = 0; i < 10; ++i)
+    switch (feedback->event_type)
     {
-      float y = 1;
-      float z = 1;
+      case visualization_msgs::InteractiveMarkerFeedback::MOUSE_DOWN:
+        {} break;
 
-      geometry_msgs::Point p;
-      p.x = (int32_t)i;
-      p.y = y;
-      p.z = z;
+      case visualization_msgs::InteractiveMarkerFeedback::MOUSE_UP:
+        {
+          std::shared_ptr<visualization_msgs::InteractiveMarker> imarker = _markers[feedback->marker_name];
+          std::vector<std::shared_ptr<OECubeMarker>> cube_markers = _cube.getCubeMarkers();
 
-      // The line list needs two points for each line
-      line_list.points.push_back(p);
-      p.z += 1.0;
-      line_list.points.push_back(p);
+          for (auto it = cube_markers.begin(), end = cube_markers.end(); it != end; ++it)
+          {
+            if ((*it)->getId() == feedback->marker_name && (*it)->checkCoordsConstraints(feedback->pose.position))
+            {
+              imarker->pose = feedback->pose;
+              break;
+            }
+          }
+          geometry_msgs::Point p1;
+          p1.x = 0;
+          p1.y = 0;
+          p1.z = 0;
+
+          geometry_msgs::Point p2;
+          p2.x = 0;
+          p2.y = 1;
+          p2.z = 0;
+
+          geometry_msgs::Point p3;
+          p3.x = 1;
+          p3.y = 0;
+          p3.z = 0;
+
+          geometry_msgs::Point p_c;
+          p_c.x = 0.5;
+          p_c.y = 0.5;
+          p_c.z = -1;
+          _cube.polygonstuff(p1, p2, p3, p_c);
+
+
+          // test the walk trough the tree and the ispointinbox function
+          /*uint inbox_counter = 0;
+          for (auto it = _ocTree.begin_leafs(), end = _ocTree.end_leafs(); it != end; ++it)
+          {
+            if (_cube.isPointInBox(it.getCoordinate()))
+            {
+              ++inbox_counter;
+            }
+          }
+          std::cout << "A total of " << inbox_counter << " points are inside the box!" << std::endl;*/
+          refreshServer();
+        }
+        break;
     }
-    _marker_pub.publish(line_list);
   }
 }

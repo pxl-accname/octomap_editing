@@ -10,7 +10,8 @@ namespace octomap_editing
   {
   public:
     OECubeLine(std::shared_ptr<OECubeMarker> start, std::shared_ptr<OECubeMarker> stop);
-    visualization_msgs::Marker getMarker();
+    geometry_msgs::Point getStartPoint();
+    geometry_msgs::Point getStopPoint();
 
   private:
     std::shared_ptr<OECubeMarker> _start;
