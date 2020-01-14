@@ -66,6 +66,7 @@ add_executable(${PROJECT_NAME}
   src/OECube.cpp
   src/OECubeMarker.cpp
   src/OECubeLine.cpp
+  src/OEPlane.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC

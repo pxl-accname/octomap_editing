@@ -13,10 +13,12 @@ namespace octomap_editing
       _nh(ros::NodeHandle("octomap_editing")),
       _ocPointcloud()
   {
-    m_publishFreeSpace = true;
-
     _sub = _nh.subscribe("/octomap_point_cloud_centers", 1000, &octomap_editing::OEServer::getPointCloudCallback, this);
     _marker_pub = _nh.advertise<visualization_msgs::Marker>("/visualization_marker", 1);
+
+    _marker_planes = _nh.advertise<visualization_msgs::Marker>("/visualization_marker_planes", 1);
+    _marker_lines = _nh.advertise<visualization_msgs::Marker>("/visualization_marker_lines", 1);
+    _marker_result = _nh.advertise<visualization_msgs::Marker>("/visualization_marker_result", 1);
 
     openMapfile();
     // initially needed markers
@@ -304,10 +306,10 @@ namespace octomap_editing
 
     // create one line list and publish that
     visualization_msgs::Marker lines = _cube.getLines(_markerFactory.getNextSeq());
-    _marker_pub.publish(lines);
+    _marker_lines.publish(lines);
 
-    visualization_msgs::Marker triangles = _cube.getTriangles(_markerFactory.getNextSeq());
-    _marker_pub.publish(triangles);
+//    visualization_msgs::Marker triangles = _cube.getTriangles(_markerFactory.getNextSeq());
+//    _marker_planes.publish(triangles);
 
     for (auto it = _menus.begin(), end = _menus.end(); it != end; ++it)
     {
@@ -373,6 +375,7 @@ namespace octomap_editing
     octomath::Pose6D transformMatrix_r = getTransformationMatrix(false);
     bool occupied = false;
     octomap::point3d point;
+    octomap::point3d point_2(-2., 0.3, -0.1);
     octomap::ColorOcTree ocTree(0.05);
     //octomap::ColorOcTreeNode::Color nodeColor;
 
@@ -385,10 +388,9 @@ namespace octomap_editing
       point += transformMatrix_t.trans();
       point.rotate_IP(transformMatrix_r.roll(), transformMatrix_r.pitch(), transformMatrix_r.yaw());
       ocTree.updateNode(point, occupied);
-      //ocTree.setNodeColor(point.x(), point.y(), point.z(), nodeColor.r, nodeColor.g, nodeColor.b);
     }
 
-    ocTree.writeBinary("/home/accname/programming/ROS/octomap_editing/fr_transformed.bt"); // TODO: name of saved tree
+    ocTree.writeBinary("/home/accname/programming/ROS/octomap_editing/fr_078_tidyup.bt"); // TODO: name of saved tree
     std::cout << "Transformed OcTree saved!" << std::endl;
   }
 
@@ -486,41 +488,52 @@ namespace octomap_editing
             if ((*it)->getId() == feedback->marker_name && (*it)->checkCoordsConstraints(feedback->pose.position))
             {
               imarker->pose = feedback->pose;
+              // get the index keys from all points inside the box
+              std::vector<octomap::OcTreeKey> point_keys = _cube.checkPointInBox(std::make_shared<octomap::ColorOcTree>(_ocTree));
+              std::cout << "There are " << point_keys.size() << " nodes in the box!" << std::endl;
+
+              // octomap::KeySet free_cells;
+              octomap::KeySet occupied_cells;
+              octomap::OcTree new_ocTree(0.05);
+              octomap::OcTreeKey key;
+              _ocTree.expand();
+              std::cout << "the tree consists of " << _ocTree.size() << " cells!" << std::endl;
+
+              // all free cells get inserted into the new tree immediately
+              for (auto it_tr = _ocTree.begin_tree(), end_tr = _ocTree.end_tree(); it_tr != end_tr; ++it_tr)
+              {
+                key = it_tr.getKey();
+
+                if (_ocTree.isNodeOccupied(*it_tr))
+                {
+                  occupied_cells.insert(key);
+                }
+
+              }
+              std::cout << "Amount of points in pk: " << occupied_cells.size() << std::endl;
+              for (auto it_pk = point_keys.begin(), end_pk = point_keys.end(); it_pk != end_pk; ++it_pk)
+              {
+                _ocTree.deleteNode(*it_pk);
+                auto it_oc = occupied_cells.find(*it_pk);
+                if (it_oc != occupied_cells.end())
+                {
+                  occupied_cells.erase(it_oc);
+                }
+              }
+              _ocTree.updateInnerOccupancy();
+              std::cout << "Amount of points in oc: " << occupied_cells.size() << std::endl;
+              for (auto it_oc = occupied_cells.begin(), end_oc = occupied_cells.end(); it_oc != end_oc; ++it_oc)
+              {
+                // _ocTree.deleteNode(*it_oc);
+                // _ocTree.updateNode(*it_oc, true);
+                new_ocTree.updateNode(*it_oc, true);
+              }
+              publishAll();
+              //new_ocTree.writeBinary("/home/accname/programming/ROS/octomap_editing/fr_078_tidyup_result.bt");
+              _ocTree.writeBinary("/home/accname/programming/ROS/octomap_editing/fr_078_tidyup_result.bt");
               break;
             }
           }
-          geometry_msgs::Point p1;
-          p1.x = 0;
-          p1.y = 0;
-          p1.z = 0;
-
-          geometry_msgs::Point p2;
-          p2.x = 0;
-          p2.y = 1;
-          p2.z = 0;
-
-          geometry_msgs::Point p3;
-          p3.x = 1;
-          p3.y = 0;
-          p3.z = 0;
-
-          geometry_msgs::Point p_c;
-          p_c.x = 0.5;
-          p_c.y = 0.5;
-          p_c.z = -1;
-          _cube.polygonstuff(p1, p2, p3, p_c);
-
-
-          // test the walk trough the tree and the ispointinbox function
-          /*uint inbox_counter = 0;
-          for (auto it = _ocTree.begin_leafs(), end = _ocTree.end_leafs(); it != end; ++it)
-          {
-            if (_cube.isPointInBox(it.getCoordinate()))
-            {
-              ++inbox_counter;
-            }
-          }
-          std::cout << "A total of " << inbox_counter << " points are inside the box!" << std::endl;*/
           refreshServer();
         }
         break;

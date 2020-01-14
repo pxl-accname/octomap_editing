@@ -4,6 +4,10 @@
 #include <OECubeMarker.hpp>
 #include <OECubeLine.hpp>
 #include <octomap_ros/conversions.h>
+#include <tf/tf.h>
+#include <OEPlane.hpp>
+#include <octomap_server/OctomapServer.h>
+//#include <tf_conversions/tf_eigen.h>
 
 namespace octomap_editing
 {
@@ -18,8 +22,12 @@ namespace octomap_editing
     void insertLines(std::shared_ptr<OECubeMarker> marker);
     visualization_msgs::Marker getLines(uint seq);
     bool isPointInBox(octomap::point3d point);
-    bool polygonstuff(geometry_msgs::Point p1, geometry_msgs::Point p2, geometry_msgs::Point p3, geometry_msgs::Point p_check);
+    std::pair<geometry_msgs::Point, geometry_msgs::Point> polygonstuff(geometry_msgs::Point p1, geometry_msgs::Point p2, geometry_msgs::Point p3, geometry_msgs::Point p_check);
     visualization_msgs::Marker getTriangles(uint seq);
+    octomap::point3d pointToPoint3d(geometry_msgs::Point p);
+    geometry_msgs::Point vectorToPoint(tf::Vector3 v);
+    std::vector<octomap::OcTreeKey> checkPointInBox(std::shared_ptr<octomap::ColorOcTree> sp_ocTree);
+    tf::Vector3 point3dToVector(octomap::point3d p);
 
   private:
     bool checkPointToCorners(octomap::point3d point, std::shared_ptr<OECubeMarker> marker);

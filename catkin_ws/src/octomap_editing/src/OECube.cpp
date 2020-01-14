@@ -33,42 +33,174 @@ namespace octomap_editing
     }
   }
 
-  bool
-  OECube::polygonstuff(geometry_msgs::Point p1, geometry_msgs::Point p2, geometry_msgs::Point p3, geometry_msgs::Point p_check)
+
+  std::vector<octomap::OcTreeKey>
+  OECube::checkPointInBox(std::shared_ptr<octomap::ColorOcTree> sp_ocTree)
   {
-    // direction vector p1 -> p2
-    geometry_msgs::Point p1p2;
-    p1p2.x = p2.x - p1.x;
-    p1p2.y = p2.y - p1.y;
-    p1p2.z = p2.z - p1.z;
+    octomap::point3d A, B, C, AB, AC, n, centroid_3d(0., 0., 0.);
+    std::vector<OEPlane> planes;
+    int sign;
+    double d, distance;
+    std::vector<octomap::OcTreeKey> points_in_box;
 
-    // direction vector p1 -> p3
-    geometry_msgs::Point p1p3;
-    p1p3.x = p3.x - p1.x;
-    p1p3.y = p3.y - p1.y;
-    p1p3.z = p3.z - p1.z;
+    for (auto it = _markers.begin(), end = _markers.end(); it != end; ++it)
+    {
+      std::vector<std::shared_ptr<OECubeMarker>> neighbours = (*it)->getNeighbours();
+      uint amount_neightbours = neighbours.size();
+      sign = (*it)->getSign();
+      A = pointToPoint3d((*it)->getMarker()->pose.position);
+      centroid_3d += A;
+      for (size_t i = 0; i < amount_neightbours; ++i)
+      {
+        B = pointToPoint3d(neighbours.at(i)->getMarker()->pose.position);
+        C = pointToPoint3d(neighbours.at((i + 1) % amount_neightbours)->getMarker()->pose.position);
 
-    // normal vector
-    geometry_msgs::Point pn;
-    pn.x = p1p2.y * p1p3.z - p1p3.y * p1p2.z;
-    pn.y = p1p2.z * p1p3.x - p1p3.z * p1p2.x;
-    pn.z = p1p2.x * p1p3.y- p1p3.x * p1p2.y;
+        AB = B - A;
+        AC = C - A;
 
-    // d of the scalar plane equation
-    double d = -(p1.x * pn.x + p1.y * pn.y + p1.z * pn.z);
+        n = AB.cross(AC);
+        d = n.dot(A);
 
-    // centroid of the traingle
-    geometry_msgs::Point centroid;
-    centroid.x = (p1.x + p2.x + p3.x) / 3;
-    centroid.y = (p1.y + p2.y + p3.y) / 3;
-    centroid.z = (p1.z + p2.z + p3.z) / 3;
+        OEPlane plane(n, d, sign);
+        planes.push_back(plane);
+      }
+    }
+    centroid_3d /= _markers.size();
 
-    // distance from p_check to the plane
-    double distance;
-    distance = (pn.x * p_check.x + pn.y * p_check.y + pn.z * p_check.z + d) / (sqrt(pow(pn.x, 2) + pow(pn.y, 2) + pow(pn.z, 2)));
+    // the initial signs of the planes should be correct!
+    for (auto it_p = planes.begin(), end_p = planes.end(); it_p != end_p; ++it_p)
+    {
+      distance = it_p->pointPlaneDistance(centroid_3d);
+      if (distance >= 0)
+      {
+        it_p->setSign(1);
+      }
+      else
+      {
+        it_p->setSign(-1);
+      }
+    }
 
-    return false;
+    bool in_box = true;
+    for(auto it = sp_ocTree->begin_leafs(), end = sp_ocTree->end_leafs(); it != end; ++it)
+    {
+      octomap::point3d point = it.getCoordinate();
+      octomap::OcTreeKey indexKey = it.getKey();
+      in_box = true;
+
+      if  (sp_ocTree->isNodeOccupied(*it))
+      {
+        for (auto it_p = planes.begin(), end_p = planes.end(); it_p != end_p; ++it_p)
+        {
+          distance = it_p->pointPlaneDistance(point);
+          sign = it_p->getSign();
+          if (!it_p->checkDistancePointPlane(point))
+          {
+            in_box = false;
+            break;
+          }
+        }
+        if (in_box)
+        {
+          points_in_box.push_back(indexKey);
+        }
+      }
+    }
+
+    return points_in_box;
   }
+
+  // TODO: testfunction
+  octomap::point3d
+  OECube::pointToPoint3d(geometry_msgs::Point p)
+  {
+    octomap::point3d v(p.x, p.y, p.z);
+    return v;
+  }
+
+  // TODO: testfunction
+  tf::Vector3
+  OECube::point3dToVector(octomap::point3d p)
+  {
+    tf::Vector3 v(p.x(), p.y(), p.z());
+    return v;
+  }
+
+  // TODO: testfunction
+  geometry_msgs::Point
+  OECube::vectorToPoint(tf::Vector3 v)
+  {
+    geometry_msgs::Point p;
+    p.x = v.x();
+    p.y = v.y();
+    p.z = v.z();
+
+    return p;
+  }
+
+//  // TODO: testfunction
+//  std::pair<geometry_msgs::Point, geometry_msgs::Point>
+//  OECube::polygonstuff(geometry_msgs::Point p1, geometry_msgs::Point p2, geometry_msgs::Point p3, geometry_msgs::Point p_check)
+//  {
+
+//    tf::Vector3 v1 = pointToVector(p1);
+//    tf::Vector3 v2 = pointToVector(p2);
+//    tf::Vector3 v3 = pointToVector(p3);
+//    tf::Vector3 v_check = pointToVector(p_check);
+//    tf::Vector3 null_v = v1;
+
+//    // direction vector p1 -> p2
+//    tf::Vector3 v1v2(v2.x() - v1.x(), v2.y() - v1.y(), v2.z() - v1.z());
+//    // direction vector p1 -> p3
+//    tf::Vector3 v1v3(v3.x() - v1.x(), v3.y() - v1.y(), v3.z() - v1.z());
+//    // normal vector
+//    tf::Vector3 vn = v1v2.cross(v1v3);
+//    // normal vector
+
+//    // schnittpunkt normalen vektor und ebene berechnen
+//    // g = p1 + r * pn
+//    // E = (x - SV) * pn
+//    // make KF: ax + by + cz +d = 0
+//    tf::Vector3 centroid(0, 0, 0);
+//    centroid += v1;
+//    centroid += v2;
+//    centroid += v3;
+//    centroid /= 3;
+
+//    tfScalar d = vn.dot(v1); // should be a scalar, v1 is stützvektor
+//    //tfScalar r = d / (vn.dot(centroid));
+//    //r *= 1/(pow(vn.x(), 2) + pow(vn.y(), 2) + pow(vn.z(), 2));
+
+//    // point of intersection
+////    geometry_msgs::Point p_s;
+////    p_s.x = (-1) * r * pn.x;
+////    p_s.y = (-1) * r * pn.y;
+////    p_s.z = (-1) * r * pn.z;
+
+//    // centroid of the traingle
+////    geometry_msgs::Point centroid;
+////    centroid.x = (p1.x + p2.x + p3.x) / 3;
+////    centroid.y = (p1.y + p2.y + p3.y) / 3;
+////    centroid.z = (p1.z + p2.z + p3.z) / 3;
+
+//    // distance from p_check to the plane
+//    tfScalar distance;
+//    tf::Vector3 p_c1(0.5, 0.5, 0.5);
+//    tf::Vector3 p_c2(2, 2, 2);
+//    v_check = p_c1;
+
+//    // inside
+//    distance = (vn.x() * v_check.x() + vn.y() * v_check.y() + vn.z() * v_check.z() - d) / (sqrt(pow(vn.x(), 2) + pow(vn.y(), 2) + pow(vn.z(), 2)));
+
+//    // outside
+//    v_check = p_c2;
+//    distance = (vn.x() * v_check.x() + vn.y() * v_check.y() + vn.z() * v_check.z() - d) / (sqrt(pow(vn.x(), 2) + pow(vn.y(), 2) + pow(vn.z(), 2)));
+
+//    std::pair<geometry_msgs::Point, geometry_msgs::Point> result;
+//    result = std::make_pair(vectorToPoint(centroid), vectorToPoint(centroid - vn));
+
+//    return result;
+//  }
 
   void
   OECube::createLines()

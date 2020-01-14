@@ -2,10 +2,11 @@
 
 namespace octomap_editing
 {
-  OECubeMarker::OECubeMarker(std::string id, std::shared_ptr<visualization_msgs::InteractiveMarker> marker, uint seq)
+  OECubeMarker::OECubeMarker(std::string id, std::shared_ptr<visualization_msgs::InteractiveMarker> marker, uint seq, int sign)
     : _id(id),
       _marker(marker),
-      _seq(seq)
+      _seq(seq),
+      _sign(sign)
   {}
 
   void
@@ -91,4 +92,11 @@ namespace octomap_editing
     }
     return result;
   }
+
+  int
+  OECubeMarker::getSign()
+  {
+    return _sign;
+  }
+
 }

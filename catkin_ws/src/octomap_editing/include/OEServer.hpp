@@ -17,6 +17,8 @@
 #include <map>
 
 
+
+
 namespace octomap_editing
 {
   class OEServer : public octomap_server::OctomapServer
@@ -71,6 +73,11 @@ namespace octomap_editing
     std::map<std::string, std::shared_ptr<interactive_markers::MenuHandler>> _menus;
     std::map<int, std::string> _mapping_menuentry_axis;
     OECube _cube;
+
+    // test
+    ros::Publisher _marker_planes;
+    ros::Publisher _marker_lines;
+    ros::Publisher _marker_result;
   };
 }
 #endif // OESERVER_HPP

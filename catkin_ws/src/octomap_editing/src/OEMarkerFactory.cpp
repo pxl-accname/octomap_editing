@@ -185,15 +185,15 @@ namespace octomap_editing
   OEMarkerFactory::makeCubeMarkers()
   {
     std::vector<std::shared_ptr<OECubeMarker>> markers;
-    markers.push_back(std::make_shared<OECubeMarker>("000", createCubeMarker("000", 0, 0, 0), getNextSeq()));
-    markers.push_back(std::make_shared<OECubeMarker>("100", createCubeMarker("100", 1, 0, 0), getNextSeq()));
-    markers.push_back(std::make_shared<OECubeMarker>("010", createCubeMarker("010", 0, 1, 0), getNextSeq()));
-    markers.push_back(std::make_shared<OECubeMarker>("110", createCubeMarker("110", 1, 1, 0), getNextSeq()));
+    markers.push_back(std::make_shared<OECubeMarker>("000", createCubeMarker("000", 0, 0, 0), getNextSeq(), 1));
+    markers.push_back(std::make_shared<OECubeMarker>("100", createCubeMarker("100", 1, 0, 0), getNextSeq(), -1));
+    markers.push_back(std::make_shared<OECubeMarker>("010", createCubeMarker("010", 0, 1, 0), getNextSeq(), 1));
+    markers.push_back(std::make_shared<OECubeMarker>("110", createCubeMarker("110", 1, 1, 0), getNextSeq(), -1));
 
-    markers.push_back(std::make_shared<OECubeMarker>("001", createCubeMarker("001", 0, 0, 1), getNextSeq()));
-    markers.push_back(std::make_shared<OECubeMarker>("101", createCubeMarker("101", 1, 0, 1), getNextSeq()));
-    markers.push_back(std::make_shared<OECubeMarker>("011", createCubeMarker("011", 0, 1, 1), getNextSeq()));
-    markers.push_back(std::make_shared<OECubeMarker>("111", createCubeMarker("111", 1, 1, 1), getNextSeq()));
+    markers.push_back(std::make_shared<OECubeMarker>("001", createCubeMarker("001", 0, 0, 1), getNextSeq(), -1));
+    markers.push_back(std::make_shared<OECubeMarker>("101", createCubeMarker("101", 1, 0, 1), getNextSeq(), 1));
+    markers.push_back(std::make_shared<OECubeMarker>("011", createCubeMarker("011", 0, 1, 1), getNextSeq(), -1));
+    markers.push_back(std::make_shared<OECubeMarker>("111", createCubeMarker("111", 1, 1, 1), getNextSeq(), 1));
 
     return markers;
   }
