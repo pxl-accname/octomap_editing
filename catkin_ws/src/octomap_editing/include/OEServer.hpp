@@ -16,9 +16,6 @@
 #include <OECube.hpp>
 #include <map>
 
-
-
-
 namespace octomap_editing
 {
   class OEServer : public octomap_server::OctomapServer
@@ -33,8 +30,6 @@ namespace octomap_editing
   private:
     // reorganized functions
     void openMapfile();
-
-
 
     interactive_markers::MenuHandler createMenu();
     // menu callback functions

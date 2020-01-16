@@ -490,46 +490,12 @@ namespace octomap_editing
               imarker->pose = feedback->pose;
               // get the index keys from all points inside the box
               std::vector<octomap::OcTreeKey> point_keys = _cube.checkPointInBox(std::make_shared<octomap::ColorOcTree>(_ocTree));
-              std::cout << "There are " << point_keys.size() << " nodes in the box!" << std::endl;
+              std::cout << std::endl << "There are " << point_keys.size() << " nodes in the box!" << std::endl;
 
-              // octomap::KeySet free_cells;
-              octomap::KeySet occupied_cells;
-              octomap::OcTree new_ocTree(0.05);
-              octomap::OcTreeKey key;
-              _ocTree.expand();
-              std::cout << "the tree consists of " << _ocTree.size() << " cells!" << std::endl;
-
-              // all free cells get inserted into the new tree immediately
-              for (auto it_tr = _ocTree.begin_tree(), end_tr = _ocTree.end_tree(); it_tr != end_tr; ++it_tr)
-              {
-                key = it_tr.getKey();
-
-                if (_ocTree.isNodeOccupied(*it_tr))
-                {
-                  occupied_cells.insert(key);
-                }
-
-              }
-              std::cout << "Amount of points in pk: " << occupied_cells.size() << std::endl;
               for (auto it_pk = point_keys.begin(), end_pk = point_keys.end(); it_pk != end_pk; ++it_pk)
               {
                 _ocTree.deleteNode(*it_pk);
-                auto it_oc = occupied_cells.find(*it_pk);
-                if (it_oc != occupied_cells.end())
-                {
-                  occupied_cells.erase(it_oc);
-                }
               }
-              _ocTree.updateInnerOccupancy();
-              std::cout << "Amount of points in oc: " << occupied_cells.size() << std::endl;
-              for (auto it_oc = occupied_cells.begin(), end_oc = occupied_cells.end(); it_oc != end_oc; ++it_oc)
-              {
-                // _ocTree.deleteNode(*it_oc);
-                // _ocTree.updateNode(*it_oc, true);
-                new_ocTree.updateNode(*it_oc, true);
-              }
-              publishAll();
-              //new_ocTree.writeBinary("/home/accname/programming/ROS/octomap_editing/fr_078_tidyup_result.bt");
               _ocTree.writeBinary("/home/accname/programming/ROS/octomap_editing/fr_078_tidyup_result.bt");
               break;
             }

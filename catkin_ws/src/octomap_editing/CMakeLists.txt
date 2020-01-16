@@ -15,9 +15,25 @@ set(PACKAGE_DEPENDENCIES
   pcl_ros
   octomap_server
   geometry_msgs
+  rviz
 )
 find_package(catkin REQUIRED COMPONENTS ${PACKAGE_DEPENDENCIES})
+catkin_package()
+
 find_package(octomap REQUIRED)
+
+find_package(Qt5 COMPONENTS Core Gui Widget REQUIRED)
+INCLUDE(${QT_USE_FILE})
+
+## I prefer the Qt signals and slots to avoid defining "emit", "slots",
+## etc because they can conflict with boost signals, so define QT_NO_KEYWORDS here.
+add_definitions(-DQT_NO_KEYWORDS)
+## Here we specify which header files need to be run through "moc",
+## Qt's meta-object compiler.
+qt5_wrap_cpp(MOC_FILES
+  include/OEPanel.hpp
+)
+
 
 ###################################
 ## catkin specific configuration ##
@@ -57,8 +73,9 @@ catkin_package(
 # add_library(leuze_sensor
 #   src/${PROJECT_NAME}/leuze_sensor.cpp
 # )
-## Declare a cpp executable
-add_executable(${PROJECT_NAME}
+
+
+set(SOURCE_FILES
   src/octomap_editing.cpp
   src/OEServer.cpp
   src/OEMarker.cpp
@@ -67,7 +84,12 @@ add_executable(${PROJECT_NAME}
   src/OECubeMarker.cpp
   src/OECubeLine.cpp
   src/OEPlane.cpp
+  src/OEPanel.cpp
+  ${MOC_FILES}
 )
+
+## Declare a cpp executable
+add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
 target_include_directories(${PROJECT_NAME} PUBLIC
   ${CMAKE_SOURCE_DIR}/include
@@ -81,8 +103,12 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(${PROJECT_NAME}
+  ${QT_LIBRARIES}
+  # default_plugin
   ${catkin_LIBRARIES}
   ${OCTOMAP_LIBRARIES}
+  # Qt5::Widgets
+
 )
 
 
