@@ -16,6 +16,16 @@
 #include <OECube.hpp>
 #include <map>
 
+/*
+ * This class loads the same .bt file as the server which is publishing the pointcloud etc.
+ * It does not seem to be that easy to access a procted member variable from an base class...
+ * Is there a way?
+ *
+ * Maybe remove the inheritance and copy some functionality from the OctomapServer class directly.
+ */
+
+
+
 namespace octomap_editing
 {
   class OEServer : public octomap_server::OctomapServer
@@ -26,41 +36,52 @@ namespace octomap_editing
     void createControlMarker(std::string name = "");
     void createTextMarker(std::string name = "");
     void createCube();
+    void saveMap(bool delete_points);
 
   private:
     // reorganized functions
     void openMapfile();
+
+    // conversion functions
+    octomath::Pose6D geometryPoseToPose6D(geometry_msgs::Pose geometryPose);
+    geometry_msgs::Pose pose6DToGeometryPose(octomath::Pose6D octoPose);
+    octomath::Pose6D getTotalTransformation();
+    std::string printCoords(octomath::Pose6D pose);
 
     interactive_markers::MenuHandler createMenu();
     // menu callback functions
     void menuMoveAxisFeedback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback);
     void menuRotateAxisFeedback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback);
     void processMarkerFeedback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback);
-    void applyChangesFeedback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback);
     void resetChangesFeedback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback);
     void menuAddRemoveMoveAxisFeedback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback);
     void menuAddRemoveRotateAxisFeedback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback);
     void processCubeMarkerFeedback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback);
     void getPointCloudCallback(const sensor_msgs::PointCloud2 &pc);
     void publishPointCloud();
-    octomap::pose6d getTransformationMatrix(bool transl);
+//    octomap::pose6d getTransformationMatrix(bool transl);
     void refreshServer();
-    void updateText(geometry_msgs::Pose pose);
-    void calculatePoseChange(geometry_msgs::Pose pose);
+    void updateText();
+    void calculatePoseChange(octomath::Pose6D pose);
 
-    interactive_markers::InteractiveMarkerServer _server;
-    OEMarkerFactory _markerFactory;
-    std::vector<interactive_markers::MenuHandler::EntryHandle> _menu_entries;
-    visualization_msgs::InteractiveMarker _imarker;
-    geometry_msgs::Pose _pointcloud_pose_change;
-    visualization_msgs::InteractiveMarker _imarker_text;
+    octomath::Pose6D getPClatestPose();
+    octomath::Pose6D calculateLatestPoseChange();
+
+
+    interactive_markers::InteractiveMarkerServer _server;                     // used to serve the interactive markers
+    OEMarkerFactory _markerFactory;                                           // creates the markers
+    std::vector<interactive_markers::MenuHandler::EntryHandle> _menu_entries; // needed to handle the menus associated with the markers
+    visualization_msgs::InteractiveMarker _imarker;                           // that should be the control marker
+    geometry_msgs::Pose _pointcloud_pose_change;                              // total change of the pointcloud --> can be obtained by combining all pose6d in the history
+    visualization_msgs::InteractiveMarker _imarker_text;                      // the test shown by the control marker
+    std::vector<octomath::Pose6D> _history_pose;                              // saves all positions of the pointcloud --> needed for a history function (undo/redo)
+    octomath::Pose6D _pc_cm_difference;
 
     ros::NodeHandle _nh;
     ros::Subscriber _sub;
     ros::Publisher _pub;
     ros::Publisher _marker_pub;
     octomap::Pointcloud _ocPointcloud;
-    octomap::ColorOcTree _ocTree;
 
     // reorganisation of the class ######################################
     std::string _mapFilename;

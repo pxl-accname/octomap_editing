@@ -1,0 +1,7 @@
+<library path="lib/octomap_editing">
+  <class name="octomap_editing/OEPanel"
+         type="octomap_editing::OEPanel"
+         base_class_type="rviz::Panel">
+    <description>A panel widget allowing the user to save the current Octomap.</description>
+  </class>
+</library>

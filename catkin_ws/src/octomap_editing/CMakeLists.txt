@@ -22,8 +22,10 @@ catkin_package()
 
 find_package(octomap REQUIRED)
 
-find_package(Qt5 COMPONENTS Core Gui Widget REQUIRED)
-INCLUDE(${QT_USE_FILE})
+# set(CMAKE_PREFIX_PATH "/usr/lib/x86_64-linux-gnu/cmake/Qt5Widget")
+find_package(Qt5 COMPONENTS Core Gui Widgets REQUIRED)
+# include(${QT_USE_FILE})
+
 
 ## I prefer the Qt signals and slots to avoid defining "emit", "slots",
 ## etc because they can conflict with boost signals, so define QT_NO_KEYWORDS here.
@@ -90,7 +92,7 @@ set(SOURCE_FILES
 
 ## Declare a cpp executable
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
-
+qt5_use_modules(octomap_editing Core Gui Widgets)
 target_include_directories(${PROJECT_NAME} PUBLIC
   ${CMAKE_SOURCE_DIR}/include
   ${catkin_INCLUDE_DIRS}

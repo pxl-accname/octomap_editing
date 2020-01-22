@@ -58,6 +58,6 @@
     <!-- <metapackage/> -->
 
     <!-- Other tools can request additional information be placed here -->
-
+    <rviz plugin="plugin_description.xml"/>
   </export>
 </package>

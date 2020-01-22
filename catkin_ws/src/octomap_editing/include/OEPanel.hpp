@@ -2,40 +2,36 @@
 #define OEPANEL_HPP
 
 #include <QWidget>
-#include <QSlider>
-#include <QLabel>
-#include <QGridLayout>
 #include <QVBoxLayout>
+#include <QPushButton>
+#include <QSize>
+#include <iostream>
+#include <OEServer.hpp>
+#include <QCheckBox>
 
-#include "rviz/visualization_manager.h"
-#include "rviz/render_panel.h"
-#include "rviz/display.h"
-
-namespace rviz
-{
-  class Display;
-  class RenderPanel;
-  class VisualizationManager;
-}
+#include "rviz/panel.h"
 
 namespace octomap_editing
 {
-  class OEPanel: public QWidget
+  class OEPanel: public rviz::Panel
   {
+    // This class uses Qt slots and is a subclass of QObject, so it needs
+    // the Q_OBJECT macro.
     Q_OBJECT
 
     public:
       OEPanel(QWidget* parent = 0);
-      // virtual ~OEPanel();
+      void addServer(std::shared_ptr<octomap_editing::OEServer> server);
 
+    // Next come a couple of public Qt slots.
     private Q_SLOTS:
-      void setThickness(int thickness_percent);
-      void setCellSize(int cell_size_percent);
+      void save();
 
     private:
-      QSharedPointer<rviz::VisualizationManager> manager_;
-      QSharedPointer<rviz::RenderPanel> render_panel_;
-      QSharedPointer<rviz::Display> grid_;
+      std::shared_ptr<octomap_editing::OEServer> _server;
+      QPushButton* _button_save;
+      QCheckBox* _checkbox_delete;
+      QMetaObject::Connection _button_save_connection;
   };
 }
 
