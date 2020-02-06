@@ -332,62 +332,44 @@ namespace octomap_editing
   }
 
 
-
   // ################################################ CALLBACK FUNCTIONS ################################################
   void
   OEServer::menuAddRemoveTranslationAxisCallback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback)
   {
     std::shared_ptr<visualization_msgs::InteractiveMarker> marker = _markers[feedback->marker_name];
+    std::shared_ptr<interactive_markers::MenuHandler> menu = _menus[feedback->marker_name];
 
-    if (_mapping_menuentry_axis[feedback->menu_entry_id] == "addAll")
+    if (_mapping_menuentry_axis[feedback->menu_entry_id] == "addAll") // entry == 7
     {
       marker->controls.push_back(_markerFactory.createTranslationAxisControl("translation_X"));
       marker->controls.push_back(_markerFactory.createTranslationAxisControl("translation_Y"));
       marker->controls.push_back(_markerFactory.createTranslationAxisControl("translation_Z"));
+      menu->setCheckState(4, MenuHandler::CHECKED);
+      menu->setCheckState(5, MenuHandler::CHECKED);
+      menu->setCheckState(6, MenuHandler::CHECKED);
     }
     else if (_mapping_menuentry_axis[feedback->menu_entry_id] == "removeAll")
     {
-      std::cout << "(translation) Das muss noch gefixt werden!" << std::endl;
-//      MenuHandler::CheckState check_state;
-//      std::shared_ptr<visualization_msgs::InteractiveMarker> marker = _markers[feedback->marker_name];
-//      std::shared_ptr<interactive_markers::MenuHandler> menu = _menus[marker->name];
-//      menu->getCheckState(feedback->menu_entry_id, check_state);
-
-//      if (check_state == MenuHandler::CHECKED)
-//      {
-//        menu->setCheckState(feedback->menu_entry_id, MenuHandler::UNCHECKED);
-//        std::string name = "move_";
-//        name += _mapping_menuentry_axis[feedback->menu_entry_id];
-//        for (auto it = marker->controls.begin(), end = marker->controls.end(); it != end; ++it)
-//        {
-//          if (it->name == name)
-//          {
-//            marker->controls.erase(it);
-//          }
-//        }
-//      }
-//      else
-//      {
-//        menu->setCheckState(feedback->menu_entry_id, MenuHandler::CHECKED);
-//        std::string title;
-//        menu->getTitle(feedback->menu_entry_id, title);
-//        marker->controls.push_back(_markerFactory.createMoveAxisControl("move_" + title));
-//      }
-//      refreshServer();
-
-
-    }
-    else
-    {
-      std::vector<visualization_msgs::InteractiveMarkerControl> new_controls;
-      for (size_t i = 0; i < marker->controls.size(); ++i)
+      // do not delete the controls directly because it will mess up the for loop
+      // instead the iterators are saved in a vector and iterator over after the first for loop
+      std::vector<std::vector<visualization_msgs::InteractiveMarkerControl>::iterator> tmp_it;
+      for (auto it = marker->controls.begin(), end = marker->controls.end(); it != end; ++it)
       {
-        if (marker->controls[i].name == "")
+        if (it->name == "translation_X" ||
+            it->name == "translation_Y" ||
+            it->name == "translation_Z")
         {
-          new_controls.push_back(marker->controls[i]);
+          tmp_it.push_back(it);
         }
       }
-      marker->controls = new_controls;
+
+      for (auto it = tmp_it.begin(), end = tmp_it.end(); it != end; ++it)
+      {
+        marker->controls.erase(*it);
+      }
+      menu->setCheckState(4, MenuHandler::UNCHECKED);
+      menu->setCheckState(5, MenuHandler::UNCHECKED);
+      menu->setCheckState(6, MenuHandler::UNCHECKED);
     }
     refreshServer();
   }
@@ -397,28 +379,105 @@ namespace octomap_editing
   OEServer:: menuAddRemoveRotateAxisCallback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback)
   {
     std::shared_ptr<visualization_msgs::InteractiveMarker> marker = _markers[feedback->marker_name];
+    std::shared_ptr<interactive_markers::MenuHandler> menu = _menus[feedback->marker_name];
+
 
     if (_mapping_menuentry_axis[feedback->menu_entry_id] == "addAll")
     {
       marker->controls.push_back(_markerFactory.createRotateAxisControl("rotate_X"));
       marker->controls.push_back(_markerFactory.createRotateAxisControl("rotate_Y"));
       marker->controls.push_back(_markerFactory.createRotateAxisControl("rotate_Z"));
+      menu->setCheckState(9, MenuHandler::CHECKED);
+      menu->setCheckState(10, MenuHandler::CHECKED);
+      menu->setCheckState(11, MenuHandler::CHECKED);
     }
     else if (_mapping_menuentry_axis[feedback->menu_entry_id] == "removeAll")
     {
-      std::cout << "(Rotate) Das muss noch gefixt werden!" << std::endl;
+      // do not delete the controls directly because it will mess up the for loop
+      // instead the iterators are saved in a vector and iterator over after the first for loop
+      std::vector<std::vector<visualization_msgs::InteractiveMarkerControl>::iterator> tmp_it;
+      for (auto it = marker->controls.begin(), end = marker->controls.end(); it != end; ++it)
+      {
+        if (it->name == "rotate_X" ||
+            it->name == "rotate_Y" ||
+            it->name == "rotate_Z")
+        {
+          tmp_it.push_back(it);
+        }
+      }
+
+      for (auto it = tmp_it.begin(), end = tmp_it.end(); it != end; ++it)
+      {
+        marker->controls.erase(*it);
+      }
+
+      menu->setCheckState(9, MenuHandler::UNCHECKED);
+      menu->setCheckState(10, MenuHandler::UNCHECKED);
+      menu->setCheckState(11, MenuHandler::UNCHECKED);
+    }
+    refreshServer();
+  }
+
+
+  void
+  OEServer::menuTranslationAxisCallback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback)
+  {
+    MenuHandler::CheckState check_state;
+    std::shared_ptr<visualization_msgs::InteractiveMarker> marker = _markers[feedback->marker_name];
+    std::shared_ptr<interactive_markers::MenuHandler> menu = _menus[marker->name];
+    menu->getCheckState(feedback->menu_entry_id, check_state);
+
+    if (check_state == MenuHandler::CHECKED)
+    {
+      menu->setCheckState(feedback->menu_entry_id, MenuHandler::UNCHECKED);
+      std::string name = "translation_";
+      name += _mapping_menuentry_axis[feedback->menu_entry_id];
+      for (auto it = marker->controls.begin(), end = marker->controls.end(); it != end; ++it)
+      {
+        if (it->name == name)
+        {
+          marker->controls.erase(it);
+        }
+      }
     }
     else
     {
-      std::vector<visualization_msgs::InteractiveMarkerControl> new_controls;
-      for (size_t i = 0; i < marker->controls.size(); ++i)
+      menu->setCheckState(feedback->menu_entry_id, MenuHandler::CHECKED);
+      std::string title;
+      menu->getTitle(feedback->menu_entry_id, title);
+      marker->controls.push_back(_markerFactory.createTranslationAxisControl("translation_" + title));
+    }
+    refreshServer();
+  }
+
+
+  void
+  OEServer::menuRotateAxisCallback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback)
+  {
+    MenuHandler::CheckState check_state;
+    std::shared_ptr<visualization_msgs::InteractiveMarker> marker = _markers[feedback->marker_name];
+    std::shared_ptr<interactive_markers::MenuHandler> menu = _menus[marker->name];
+    menu->getCheckState(feedback->menu_entry_id, check_state);
+
+    if (check_state == MenuHandler::CHECKED)
+    {
+      menu->setCheckState(feedback->menu_entry_id, MenuHandler::UNCHECKED);
+      std::string name = "rotate_";
+      name += _mapping_menuentry_axis[feedback->menu_entry_id];
+      for (auto it = marker->controls.begin(), end = marker->controls.end(); it != end; ++it)
       {
-        if (marker->controls[i].name == "")
+        if (it->name == name)
         {
-          new_controls.push_back(marker->controls[i]);
+          marker->controls.erase(it);
         }
       }
-      marker->controls = new_controls;
+    }
+    else
+    {
+      menu->setCheckState(feedback->menu_entry_id, MenuHandler::CHECKED);
+      std::string title;
+      menu->getTitle(feedback->menu_entry_id, title);
+      marker->controls.push_back(_markerFactory.createRotateAxisControl("rotate_" + title));
     }
     refreshServer();
   }
@@ -497,70 +556,6 @@ namespace octomap_editing
         }
         break;
     }
-  }
-
-
-  void
-  OEServer::menuTranslationAxisCallback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback)
-  {
-    MenuHandler::CheckState check_state;
-    std::shared_ptr<visualization_msgs::InteractiveMarker> marker = _markers[feedback->marker_name];
-    std::shared_ptr<interactive_markers::MenuHandler> menu = _menus[marker->name];
-    menu->getCheckState(feedback->menu_entry_id, check_state);
-
-    if (check_state == MenuHandler::CHECKED)
-    {
-      menu->setCheckState(feedback->menu_entry_id, MenuHandler::UNCHECKED);
-      std::string name = "translation_";
-      name += _mapping_menuentry_axis[feedback->menu_entry_id];
-      for (auto it = marker->controls.begin(), end = marker->controls.end(); it != end; ++it)
-      {
-        if (it->name == name)
-        {
-          marker->controls.erase(it);
-        }
-      }
-    }
-    else
-    {
-      menu->setCheckState(feedback->menu_entry_id, MenuHandler::CHECKED);
-      std::string title;
-      menu->getTitle(feedback->menu_entry_id, title);
-      marker->controls.push_back(_markerFactory.createTranslationAxisControl("translation_" + title));
-    }
-    refreshServer();
-  }
-
-
-  void
-  OEServer::menuRotateAxisCallback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback)
-  {
-    MenuHandler::CheckState check_state;
-    std::shared_ptr<visualization_msgs::InteractiveMarker> marker = _markers[feedback->marker_name];
-    std::shared_ptr<interactive_markers::MenuHandler> menu = _menus[marker->name];
-    menu->getCheckState(feedback->menu_entry_id, check_state);
-
-    if (check_state == MenuHandler::CHECKED)
-    {
-      menu->setCheckState(feedback->menu_entry_id, MenuHandler::UNCHECKED);
-      std::string name = "rotate_";
-      name += _mapping_menuentry_axis[feedback->menu_entry_id];
-      for (auto it = marker->controls.begin(), end = marker->controls.end(); it != end; ++it)
-      {
-        if (it->name == name)
-        {
-          marker->controls.erase(it);
-        }
-      }
-    }
-    else
-    {
-      menu->setCheckState(feedback->menu_entry_id, MenuHandler::CHECKED);
-      std::string title;
-      menu->getTitle(feedback->menu_entry_id, title);
-      marker->controls.push_back(_markerFactory.createRotateAxisControl("rotate_" + title));
-    }
-    refreshServer();
   }
 
   // ################################################ CONVERSION FUNCTIONS ################################################
