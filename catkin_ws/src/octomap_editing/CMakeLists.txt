@@ -3,7 +3,7 @@ project(octomap_editing)
 
 # enable c+11 suport
 # set(CMAKE_CXX_FLAGS "-std=c++0x $(CMAKE_CXX_FLAGS)")
-# add_compile_options(-std=c++11)
+add_compile_options(-std=c++11)
 
 set(PACKAGE_DEPENDENCIES
   roscpp
@@ -61,6 +61,10 @@ qt5_wrap_cpp(MOC_FILES
 ## Your package locations should be listed before other locations
 # include_directories(include)
 
+include_directories(
+  include
+)
+
 catkin_package(
   INCLUDE_DIRS include
   # LIBRARIES ${PROJECT_NAME}
@@ -80,7 +84,6 @@ catkin_package(
 set(SOURCE_FILES
   src/octomap_editing.cpp
   src/OEServer.cpp
-  src/OEMarker.cpp
   src/OEMarkerFactory.cpp
   src/OECube.cpp
   src/OECubeMarker.cpp

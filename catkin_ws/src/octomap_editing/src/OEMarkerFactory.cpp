@@ -6,7 +6,7 @@ namespace octomap_editing
     : _resolution(resolution)
   {}
 
-  // first type of marker
+
   visualization_msgs::InteractiveMarker
   OEMarkerFactory::createControlMarker(std::string name, double x, double y, double z)
   {
@@ -21,6 +21,7 @@ namespace octomap_editing
     return imarker;
   }
 
+
   std::shared_ptr<visualization_msgs::InteractiveMarker>
   OEMarkerFactory::createCubeMarker(std::string name, double x, double y, double z)
   {
@@ -32,13 +33,13 @@ namespace octomap_editing
     imarker.controls.push_back(makeControl());
     imarker.controls[0].markers.push_back(makeMarker(visualization_msgs::Marker::CUBE, ""));
 
-    imarker.controls.push_back(makeMoveControl(1,0,0));
-    imarker.controls.push_back(makeMoveControl(0,1,0));
-    imarker.controls.push_back(makeMoveControl(0,0,1));
+    imarker.controls.push_back(makeTranslationControl(1,0,0));
+    imarker.controls.push_back(makeTranslationControl(0,1,0));
+    imarker.controls.push_back(makeTranslationControl(0,0,1));
     return std::make_shared<visualization_msgs::InteractiveMarker>(imarker);
   }
 
-  // second type of marker
+
   visualization_msgs::InteractiveMarker
   OEMarkerFactory::createTextMarker(std::string name, double x, double y, double z)
   {
@@ -55,30 +56,6 @@ namespace octomap_editing
     return imarker_text;
   }
 
-  // third type of marker
-  visualization_msgs::Marker
-  OEMarkerFactory::createOriginMarker()
-  {
-    visualization_msgs::Marker help_marker;
-    help_marker.action = visualization_msgs::Marker::ADD;
-    help_marker.color.r = 0.0;
-    help_marker.color.g = 1.0;
-    help_marker.color.b = 0.0;
-    help_marker.color.a = 1.0;
-    help_marker.header.stamp = ros::Time::now();
-    help_marker.header.frame_id = "map";
-    help_marker.header.seq = 999;
-    geometry_msgs::Point p;
-    p.x = p.y = 0.0;
-    p.z = 1.0;
-    help_marker.points.push_back(p);
-    p.z = -3.0;
-    help_marker.points.push_back(p);
-    help_marker.type = visualization_msgs::Marker::ARROW;
-    help_marker.scale.x = 0.5; // scale.x is the shaft diameter
-    help_marker.scale.y = 0.5; // scale.y is the head diameter
-    help_marker.scale.z = 0.25; // If scale.z is not zero, it specifies the head length.
-  }
 
   geometry_msgs::Pose
   OEMarkerFactory::makeMarkerPose(double x, double y, double z)
@@ -90,6 +67,7 @@ namespace octomap_editing
     pose.orientation.w = 1.0;
     return pose;
   }
+
 
   visualization_msgs::Marker
   OEMarkerFactory::makeMarker(uint type, std::string text)
@@ -107,15 +85,17 @@ namespace octomap_editing
     return marker;
   }
 
+
   std_msgs::Header
   OEMarkerFactory::makeMarkerHeader()
   {
-    std_msgs::Header header; // TODO: make this an argument
-    header.frame_id = "map";  // TODO: make this an argument
+    std_msgs::Header header;
+    header.frame_id = "map";
     header.stamp = ros::Time::now();
     header.seq = getNextSeq();
     return header;
   }
+
 
   visualization_msgs::InteractiveMarkerControl
   OEMarkerFactory::makeControl(uint control_mode, std::string name)
@@ -127,8 +107,9 @@ namespace octomap_editing
     return control;
   }
 
+
   visualization_msgs::InteractiveMarkerControl
-  OEMarkerFactory::makeMoveControl(double x, double y, double z)
+  OEMarkerFactory::makeTranslationControl(double x, double y, double z)
   {
     visualization_msgs::InteractiveMarkerControl control;
     control.interaction_mode = visualization_msgs::InteractiveMarkerControl::MOVE_AXIS;
@@ -140,6 +121,7 @@ namespace octomap_editing
     control.always_visible = true;
     return control;
   }
+
 
   std::string
   OEMarkerFactory::formatText(double x , double y, double z, double roll, double pitch, double yaw)
@@ -155,18 +137,19 @@ namespace octomap_editing
     return text.str();
   }
 
+
   visualization_msgs::InteractiveMarkerControl
-  OEMarkerFactory::createMoveAxisControl(std::string axis)
+  OEMarkerFactory::createTranslationAxisControl(std::string axis)
   {
     double x = 0.0, y = 0.0, z = 0.0;
 
-    if (axis == "move_X")
+    if (axis == "translation_X")
       x = 1.0;
 
-    if (axis == "move_Y")
+    if (axis == "translation_Y")
       z = 1.0;
 
-    if (axis == "move_Z")
+    if (axis == "translation_Z")
       y = 1.0;
 
     visualization_msgs::InteractiveMarkerControl interactive_control;
@@ -180,6 +163,7 @@ namespace octomap_editing
     interactive_control.always_visible = true;
     return interactive_control;
   }
+
 
   std::vector<std::shared_ptr<OECubeMarker>>
   OEMarkerFactory::makeCubeMarkers()
@@ -198,6 +182,7 @@ namespace octomap_editing
     return markers;
   }
 
+
   OECube
   OEMarkerFactory::createCube()
   {
@@ -207,6 +192,7 @@ namespace octomap_editing
     cube.createLines();
     return cube;
   }
+
 
   visualization_msgs::InteractiveMarkerControl
   OEMarkerFactory::createRotateAxisControl(std::string axis)

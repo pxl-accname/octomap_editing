@@ -6,17 +6,20 @@ namespace octomap_editing
     : _lines_counter(0)
   {}
 
+
   void
   OECube::setCubeMarkers(std::vector<std::shared_ptr<OECubeMarker>> markers)
   {
     _markers = markers;
   }
 
+
   std::vector<std::shared_ptr<OECubeMarker>>
   OECube::getCubeMarkers()
   {
     return _markers;
   }
+
 
   void
   OECube::determineNeighbourMarkers()
@@ -110,97 +113,6 @@ namespace octomap_editing
     return points_in_box;
   }
 
-  // TODO: testfunction
-  octomap::point3d
-  OECube::pointToPoint3d(geometry_msgs::Point p)
-  {
-    octomap::point3d v(p.x, p.y, p.z);
-    return v;
-  }
-
-  // TODO: testfunction
-  tf::Vector3
-  OECube::point3dToVector(octomap::point3d p)
-  {
-    tf::Vector3 v(p.x(), p.y(), p.z());
-    return v;
-  }
-
-  // TODO: testfunction
-  geometry_msgs::Point
-  OECube::vectorToPoint(tf::Vector3 v)
-  {
-    geometry_msgs::Point p;
-    p.x = v.x();
-    p.y = v.y();
-    p.z = v.z();
-
-    return p;
-  }
-
-//  // TODO: testfunction
-//  std::pair<geometry_msgs::Point, geometry_msgs::Point>
-//  OECube::polygonstuff(geometry_msgs::Point p1, geometry_msgs::Point p2, geometry_msgs::Point p3, geometry_msgs::Point p_check)
-//  {
-
-//    tf::Vector3 v1 = pointToVector(p1);
-//    tf::Vector3 v2 = pointToVector(p2);
-//    tf::Vector3 v3 = pointToVector(p3);
-//    tf::Vector3 v_check = pointToVector(p_check);
-//    tf::Vector3 null_v = v1;
-
-//    // direction vector p1 -> p2
-//    tf::Vector3 v1v2(v2.x() - v1.x(), v2.y() - v1.y(), v2.z() - v1.z());
-//    // direction vector p1 -> p3
-//    tf::Vector3 v1v3(v3.x() - v1.x(), v3.y() - v1.y(), v3.z() - v1.z());
-//    // normal vector
-//    tf::Vector3 vn = v1v2.cross(v1v3);
-//    // normal vector
-
-//    // schnittpunkt normalen vektor und ebene berechnen
-//    // g = p1 + r * pn
-//    // E = (x - SV) * pn
-//    // make KF: ax + by + cz +d = 0
-//    tf::Vector3 centroid(0, 0, 0);
-//    centroid += v1;
-//    centroid += v2;
-//    centroid += v3;
-//    centroid /= 3;
-
-//    tfScalar d = vn.dot(v1); // should be a scalar, v1 is stützvektor
-//    //tfScalar r = d / (vn.dot(centroid));
-//    //r *= 1/(pow(vn.x(), 2) + pow(vn.y(), 2) + pow(vn.z(), 2));
-
-//    // point of intersection
-////    geometry_msgs::Point p_s;
-////    p_s.x = (-1) * r * pn.x;
-////    p_s.y = (-1) * r * pn.y;
-////    p_s.z = (-1) * r * pn.z;
-
-//    // centroid of the traingle
-////    geometry_msgs::Point centroid;
-////    centroid.x = (p1.x + p2.x + p3.x) / 3;
-////    centroid.y = (p1.y + p2.y + p3.y) / 3;
-////    centroid.z = (p1.z + p2.z + p3.z) / 3;
-
-//    // distance from p_check to the plane
-//    tfScalar distance;
-//    tf::Vector3 p_c1(0.5, 0.5, 0.5);
-//    tf::Vector3 p_c2(2, 2, 2);
-//    v_check = p_c1;
-
-//    // inside
-//    distance = (vn.x() * v_check.x() + vn.y() * v_check.y() + vn.z() * v_check.z() - d) / (sqrt(pow(vn.x(), 2) + pow(vn.y(), 2) + pow(vn.z(), 2)));
-
-//    // outside
-//    v_check = p_c2;
-//    distance = (vn.x() * v_check.x() + vn.y() * v_check.y() + vn.z() * v_check.z() - d) / (sqrt(pow(vn.x(), 2) + pow(vn.y(), 2) + pow(vn.z(), 2)));
-
-//    std::pair<geometry_msgs::Point, geometry_msgs::Point> result;
-//    result = std::make_pair(vectorToPoint(centroid), vectorToPoint(centroid - vn));
-
-//    return result;
-//  }
 
   void
   OECube::createLines()
@@ -211,11 +123,11 @@ namespace octomap_editing
       auto p = std::find(_neededMarkers.begin(), _neededMarkers.end(), (*it)->getId());
       if (p != _neededMarkers.end())
       {
-        // marker's id is in needmarkers -> create lines from it to neighbours
         insertLines(*it);
       }
     }
   }
+
 
   void
   OECube::insertLines(std::shared_ptr<OECubeMarker> marker)
@@ -229,10 +141,10 @@ namespace octomap_editing
     }
   }
 
+
   visualization_msgs::Marker
   OECube::getLines(uint seq)
   {
-    // create line_list here
     visualization_msgs::Marker line_list;
     line_list.header.frame_id = "map";
     line_list.header.stamp = ros::Time::now();
@@ -242,7 +154,6 @@ namespace octomap_editing
     line_list.ns = "";
     line_list.type = visualization_msgs::Marker::LINE_LIST;
     line_list.scale.x = 0.1;
-    // line.scale.y = 0.5;
     line_list.color.b = 1.0;
     line_list.color.a = 1.0;
     line_list.pose.orientation.w = 1;
@@ -255,10 +166,10 @@ namespace octomap_editing
     return line_list;
   }
 
+
   visualization_msgs::Marker
   OECube::getTriangles(uint seq)
   {
-    // create line_list here
     visualization_msgs::Marker triangle_list;
     triangle_list.header.frame_id = "map";
     triangle_list.header.stamp = ros::Time::now();
@@ -288,6 +199,11 @@ namespace octomap_editing
     return triangle_list;
   }
 
+
+  /*
+   * This function check if a cube markers new pose is over the bounderies.
+   * That means it checks if the coords of two neighbours "collide"
+   */
   bool
   OECube::checkPointToCorners(octomap::point3d point, std::shared_ptr<OECubeMarker> marker)
   {
@@ -321,19 +237,12 @@ namespace octomap_editing
     }
   }
 
-  bool
-  OECube::isPointInBox(octomap::point3d point)
+
+  octomap::point3d
+  OECube::pointToPoint3d(geometry_msgs::Point p)
   {
-    bool result = true;
-    // takes to long!
-    for (auto it = _markers.begin(), end = _markers.end(); it != end; ++it)
-    {
-      if (!checkPointToCorners(point, (*it)))
-      {
-        result = false;
-      }
-    }
-    return result;
+    octomap::point3d v(p.x, p.y, p.z);
+    return v;
   }
 
 }

@@ -15,11 +15,13 @@ namespace octomap_editing
     _neighbours.push_back(std::make_shared<OECubeMarker>(neightbour));
   }
 
+
   std::vector<std::shared_ptr<OECubeMarker>>
   OECubeMarker::getNeighbours()
   {
     return _neighbours;
   }
+
 
   std::string
   OECubeMarker::getId()
@@ -27,11 +29,13 @@ namespace octomap_editing
     return _id;
   }
 
+
   std::shared_ptr<visualization_msgs::InteractiveMarker>
   OECubeMarker::getMarker()
   {
     return _marker;
   }
+
 
   bool
   OECubeMarker::isNeighbour(OECubeMarker neighbour)
@@ -47,6 +51,7 @@ namespace octomap_editing
     }
     return (counter == 1) ? true : false;
   }
+
 
   bool
   OECubeMarker::checkCoords(int c1, int c2, double v1, double v2)
@@ -64,6 +69,7 @@ namespace octomap_editing
       return false;
     }
   }
+
 
   bool
   OECubeMarker::checkCoordsConstraints(geometry_msgs::Point new_own_position)
@@ -92,6 +98,7 @@ namespace octomap_editing
     }
     return result;
   }
+
 
   int
   OECubeMarker::getSign()

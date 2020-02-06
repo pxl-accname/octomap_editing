@@ -3,28 +3,19 @@
 
 #include <interactive_markers/interactive_marker_server.h>
 #include <interactive_markers/menu_handler.h>
-#include <OEMarker.hpp>
 #include <OEMarkerFactory.hpp>
-#include <pcl_ros/point_cloud.h>
-#include <octomap_msgs/conversions.h>
-#include <octomap_msgs/GetOctomap.h>
-#include <pcl_ros/transforms.h>
-#include <octomap_server/OctomapServer.h>
-#include <octomap_ros/conversions.h>
-#include <sensor_msgs/point_cloud_conversion.h>
-#include <sensor_msgs/point_cloud2_iterator.h>
 #include <OECube.hpp>
+#include <octomap_server/OctomapServer.h>
+#include <sensor_msgs/point_cloud2_iterator.h>
 #include <map>
 
+
 /*
- * This class loads the same .bt file as the server which is publishing the pointcloud etc.
- * It does not seem to be that easy to access a procted member variable from an base class...
- * Is there a way?
+ * This is the main class of the octomap_editing tool.
+ * It creates the markers, updates them, saves the octomap etc.
+ * Basically it manages the whole program.
  *
- * Maybe remove the inheritance and copy some functionality from the OctomapServer class directly.
  */
-
-
 
 namespace octomap_editing
 {
@@ -33,67 +24,57 @@ namespace octomap_editing
 
   public:
     OEServer(double resolution, std::string mapFilename, std::string update_topic);
+    void saveMap(bool delete_points);
+
+    // marker functions
     void createControlMarker(std::string name = "");
     void createTextMarker(std::string name = "");
     void createCube();
-    void saveMap(bool delete_points);
 
   private:
-    // reorganized functions
     void openMapfile();
+    interactive_markers::MenuHandler createControlMarkerMenu();
+    void publishPointCloud();
+    void refreshServer();
+    void updateText();
+    void calculatePoseChange(octomath::Pose6D pose);
+    octomath::Pose6D getPClatestPose();
+    octomath::Pose6D calculateLatestPoseChange();
+
+    // callback functions
+    void resetChangesCallback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback);
+    void menuTranslationAxisCallback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback);
+    void menuRotateAxisCallback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback);
+    void processMarkerCallback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback);
+    void menuAddRemoveTranslationAxisCallback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback);
+    void menuAddRemoveRotateAxisCallback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback);
+    void processCubeMarkerCallback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback);
+    void getPointCloudCallback(const sensor_msgs::PointCloud2 &pc);
 
     // conversion functions
     octomath::Pose6D geometryPoseToPose6D(geometry_msgs::Pose geometryPose);
     geometry_msgs::Pose pose6DToGeometryPose(octomath::Pose6D octoPose);
     octomath::Pose6D getTotalTransformation();
+
+    // helper functions
     std::string printCoords(octomath::Pose6D pose);
 
-    interactive_markers::MenuHandler createMenu();
-    // menu callback functions
-    void menuMoveAxisFeedback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback);
-    void menuRotateAxisFeedback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback);
-    void processMarkerFeedback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback);
-    void resetChangesFeedback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback);
-    void menuAddRemoveMoveAxisFeedback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback);
-    void menuAddRemoveRotateAxisFeedback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback);
-    void processCubeMarkerFeedback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback);
-    void getPointCloudCallback(const sensor_msgs::PointCloud2 &pc);
-    void publishPointCloud();
-//    octomap::pose6d getTransformationMatrix(bool transl);
-    void refreshServer();
-    void updateText();
-    void calculatePoseChange(octomath::Pose6D pose);
-
-    octomath::Pose6D getPClatestPose();
-    octomath::Pose6D calculateLatestPoseChange();
-
-
-    interactive_markers::InteractiveMarkerServer _server;                     // used to serve the interactive markers
-    OEMarkerFactory _markerFactory;                                           // creates the markers
-    std::vector<interactive_markers::MenuHandler::EntryHandle> _menu_entries; // needed to handle the menus associated with the markers
-    visualization_msgs::InteractiveMarker _imarker;                           // that should be the control marker
-    geometry_msgs::Pose _pointcloud_pose_change;                              // total change of the pointcloud --> can be obtained by combining all pose6d in the history
-    visualization_msgs::InteractiveMarker _imarker_text;                      // the test shown by the control marker
-    std::vector<octomath::Pose6D> _history_pose;                              // saves all positions of the pointcloud --> needed for a history function (undo/redo)
-    octomath::Pose6D _pc_cm_difference;
-
-    ros::NodeHandle _nh;
-    ros::Subscriber _sub;
-    ros::Publisher _pub;
-    ros::Publisher _marker_pub;
-    octomap::Pointcloud _ocPointcloud;
-
-    // reorganisation of the class ######################################
-    std::string _mapFilename;
-    std::map<std::string, std::shared_ptr<visualization_msgs::InteractiveMarker>> _markers;
-    std::map<std::string, std::shared_ptr<interactive_markers::MenuHandler>> _menus;
-    std::map<int, std::string> _mapping_menuentry_axis;
-    OECube _cube;
-
-    // test
-    ros::Publisher _marker_planes;
-    ros::Publisher _marker_lines;
-    ros::Publisher _marker_result;
+    ros::NodeHandle _nh;                                                                      // nodehandler of the package
+    ros::Subscriber _sub_pc;                                                                  // subscriber to get the pointcloud from the octomap_server
+    ros::Publisher _pub_pc;                                                                   // publishes the transformed pointcloud when the controll marker was moved
+    octomap::Pointcloud _ocPointcloud;                                                        // stores the pointcloud received from the octomapserver
+    ros::Publisher _pub_lines;                                                                // publishes the lines of the cube --> should this be in the cube class?
+    std::map<std::string, std::shared_ptr<visualization_msgs::InteractiveMarker>> _markers;   // stores a pointer to all used interactive markers
+    std::map<std::string, std::shared_ptr<interactive_markers::MenuHandler>> _menus;          // stores all the menus
+    std::map<int, std::string> _mapping_menuentry_axis;                                       // stores mapping for the controll marker menu and the axis to manipulate
+    std::string _mapFilename;                                                                 // stores the octomap filename
+    interactive_markers::InteractiveMarkerServer _server;                                     // used to control the interactive markers
+    OEMarkerFactory _markerFactory;                                                           // creates the markers
+    std::vector<interactive_markers::MenuHandler::EntryHandle> _menu_entries;                 // handles the menus associated with the markers, currently only one menu
+    std::vector<octomath::Pose6D> _history_pose;                                              // saves all poses of the pointcloud
+    OECube _cube;                                                                             // stores the reference to the cube
+    octomath::Pose6D _pc_cm_difference;                                                       // this variable stores the pose difference betwenn the pointcloud and the control marker
+    float _resolution;                                                                        // stores the resolution of the octomap
   };
 }
 #endif // OESERVER_HPP
